@@ -45,6 +45,16 @@ void Scanner::tokenize()
 		}
 		str = str+current;
 		std::string strNext = str + file[index];
+		if(str == "\/\*")
+		{
+			while(true)
+			{
+				if(getLetter() == '*')
+					if(getLetter() == '/')
+						break;
+			}
+			str = " ";
+		}
 		if(isToken(str)!= 0 && isToken(strNext)==0)
 		{
 			checkpoint = index;
@@ -56,8 +66,9 @@ void Scanner::tokenize()
 			}else{
 				currentToken.value = atoi( currentToken.str.c_str());
 			}
-			if(currentToken.type != 20)
+			if(currentToken.type != 20){
 				Tokens.push_back(currentToken);
+			}
 			str ="";
 			if(file[index] == ' ' || file[index] == '\n' || file[index] == '\t')
 				index++;
@@ -67,7 +78,7 @@ void Scanner::tokenize()
 				std::cout << currentToken.type << ", " << currentToken.value << ", " << currentToken.line << ", "<< currentToken.str << std::endl;
 			}
 		}else{
-			if( (isToken(str)==0) &&(index < file.size())&&(file[index] == ' ' || file[index] == '\n' || file[index] == '\t'))
+			if((isToken(str)==0) &&(index < file.size())&&(file[index] == ' ' || file[index] == '\n' || file[index] == '\t'))
 			{
 				printf(ANSI_COLOR_RED"error "ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,lineIndex);
 				std::cout << "\"" << str << "\"" << " is not defined." << std::endl;

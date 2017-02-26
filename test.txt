@@ -1,6 +1,10 @@
 potato
 is
 fruit
+
+/*here is a comment with all sort of bad characters and good character !!!*/
+
 int a = 13
 ?! 34
 4 + 5
+/* NOPE */
