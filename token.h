@@ -20,6 +20,9 @@
 #define SYMBOLCURL 13
 #define SYMBOLCOMMENT 14
 #define KEYWORDS 15
+#define READ 16
+#define WRITE 17
+
 struct Token{
 	int type;
 	int value;

@@ -40,7 +40,7 @@ int main (int argc, char ** argv)
 			printf(ANSI_COLOR_RESET);
 		}
 	}
-	Parser * myParser = new Parser(myScanner->Tokens);
+	Parser * myParser = new Parser(myScanner->Tokens,DEBUG);
 	delete (myScanner);
 	delete (myParser);
 	return 0;

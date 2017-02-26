@@ -132,6 +132,8 @@ int Scanner::isToken(std::string str)
 	std::regex symbolCurl("^\\{|\\}$");
 	std::regex symbolComment("^\\/\\*|\\*\\/$");
 	std::regex keywords("^else|if|int|return|void|while$");
+	std::regex read("^read$");
+	std::regex write("^write$");
 
 	if(str == " " || str == "\t" ||str == "\n")
 		return 20;
@@ -165,5 +167,9 @@ int Scanner::isToken(std::string str)
 		return SYMBOLCURL;
 	if(regex_match(str,symbolComment))
 		return SYMBOLCOMMENT;
+	if(regex_match(str,read))
+		return READ;
+	if(regex_match(str,write))
+		return WRITE;
 	return 0;
 }
