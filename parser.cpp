@@ -65,6 +65,90 @@ struct TreeNode * Parser::additiveExpression()
 	}
 	return t;
 }
+struct TreeNode * Parser::program()
+{
+}
+struct TreeNode * Parser::declaration_list()
+{
+}
+struct TreeNode * Parser::declaration()
+{
+}
+struct TreeNode * Parser::var_declaration()
+{
+}
+struct TreeNode * Parser::type_specifier()
+{
+}
+struct TreeNode * Parser::fun_declaration()
+{
+}
+struct TreeNode * Parser::params()
+{
+}
+struct TreeNode * Parser::param_list()
+{
+}
+struct TreeNode * Parser::param()
+{
+}
+struct TreeNode * Parser::compound_stmt()
+{
+}
+struct TreeNode * Parser::local_declaration()
+{
+}
+struct TreeNode * Parser::statement_list()
+{
+}
+struct TreeNode * Parser::statement()
+{
+}
+struct TreeNode * Parser::expression_stmt()
+{
+}
+struct TreeNode * Parser::section_stmt()
+{
+}
+struct TreeNode * Parser::iteration_stmt()
+{
+}
+struct TreeNode * Parser::return_stmt()
+{
+}
+struct TreeNode * Parser::expression()
+{
+}
+struct TreeNode * Parser::var()
+{
+}
+struct TreeNode * Parser::simple_expressive()
+{
+}
+struct TreeNode * Parser::relop()
+{
+}
+struct TreeNode * Parser::addop()
+{
+}
+struct TreeNode * Parser::term()
+{
+}
+struct TreeNode * Parser::mulop()
+{
+}
+struct TreeNode * Parser::factor()
+{
+}
+struct TreeNode * Parser::call()
+{
+}
+struct TreeNode * Parser::args()
+{
+}
+struct TreeNode * Parser::arg_list()
+{
+}
 Parser::~Parser()
 {
 
