@@ -1,11 +1,14 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
+#include <vector>
 
 #include "scanner.h"
 #include "parser.h"
 #include "checker.h"
 #include "color.h"
+#include "token.h"
 
 using std::cin;
 using std::cout;
@@ -28,7 +31,15 @@ int main (int argc, char ** argv)
 	if(DEBUG)
 		printf(ANSI_COLOR_RED "Warning " ANSI_COLOR_YELLOW "Debug mode\n" ANSI_COLOR_RESET);
 	Scanner *myScanner = new Scanner(path,DEBUG);
-
-//	delete (myScanner);
+	for (std::vector<Token>::iterator it = myScanner->Tokens.begin() ; it != myScanner->Tokens.end(); ++it)
+	{
+		if(DEBUG)
+		{
+			printf(ANSI_COLOR_BLUE);
+			cout << it->str << " ";
+			printf(ANSI_COLOR_RESET);
+		}
+	}
+	delete (myScanner);
 	return 0;
 }

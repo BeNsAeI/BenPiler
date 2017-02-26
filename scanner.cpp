@@ -19,7 +19,7 @@ Scanner::Scanner(std::string path,bool debug)
 	}
 	if(DEBUG)
 	{
-		printf(ANSI_COLOR_CYAN"File opened successfully.\n"ANSI_COLOR_RESET);
+		printf(ANSI_COLOR_CYAN "File opened successfully.\n" ANSI_COLOR_RESET);
 	}
 	readFile();
 	tokenize();
@@ -74,13 +74,13 @@ void Scanner::tokenize()
 				index++;
 			if(DEBUG && currentToken.type != 20)
 			{
-				printf(ANSI_COLOR_CYAN"Token:"ANSI_COLOR_RESET);
+				printf(ANSI_COLOR_CYAN "Token:" ANSI_COLOR_RESET);
 				std::cout << currentToken.type << ", " << currentToken.value << ", " << currentToken.line << ", "<< currentToken.str << std::endl;
 			}
 		}else{
 			if((isToken(str)==0) &&(index < file.size())&&(file[index] == ' ' || file[index] == '\n' || file[index] == '\t'))
 			{
-				printf(ANSI_COLOR_RED"error "ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,lineIndex);
+				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,lineIndex);
 				std::cout << "\"" << str << "\"" << " is not defined." << std::endl;
 				str = "";
 			}
@@ -95,14 +95,14 @@ void Scanner::readFile()
 	{
 		if(DEBUG)
 		{
-			printf(ANSI_COLOR_RED"Recieved: "ANSI_COLOR_RESET);
+			printf(ANSI_COLOR_RED "Recieved: " ANSI_COLOR_RESET);
 			std::cout << buffer << std::endl;
 		}
 		file = file + buffer + '\n';
 	}
 	if(DEBUG)
 	{
-		printf(ANSI_COLOR_CYAN"file: \n");
+		printf(ANSI_COLOR_CYAN "file: \n");
 		std::cout << file << std::endl;
 		printf(ANSI_COLOR_RESET);
 	}
