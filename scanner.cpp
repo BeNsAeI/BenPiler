@@ -45,14 +45,15 @@ void Scanner::tokenize()
 		}
 		str = str+current;
 		std::string strNext = str + file[index];
-		if(str == "\/\*")
+		if(str == "/*")
 		{
 			while(true)
 			{
 				if(getLetter() == '*')
-					if(getLetter() == '/')
+					if(file[index] == '/')
 						break;
 			}
+			index++;
 			str = " ";
 		}
 		if(isToken(str)!= 0 && isToken(strNext)==0)
