@@ -31,7 +31,7 @@ int main (int argc, char ** argv)
 	if(DEBUG)
 		printf(ANSI_COLOR_RED "Warning " ANSI_COLOR_YELLOW "Debug mode\n" ANSI_COLOR_RESET);
 	Scanner *myScanner = new Scanner(path,DEBUG);
-	for (std::vector<Token>::iterator it = myScanner->Tokens.begin() ; it != myScanner->Tokens.end(); ++it)
+	for (std::vector<struct Token>::iterator it = myScanner->Tokens.begin() ; it != myScanner->Tokens.end(); ++it)
 	{
 		if(DEBUG)
 		{
@@ -40,6 +40,8 @@ int main (int argc, char ** argv)
 			printf(ANSI_COLOR_RESET);
 		}
 	}
+	Parser * myParser = new Parser(myScanner->Tokens);
 	delete (myScanner);
+	delete (myParser);
 	return 0;
 }

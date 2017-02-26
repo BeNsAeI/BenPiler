@@ -3,7 +3,7 @@ all:
 #	make run
 	make debug
 compile:
-	g++ -std=c++0x main.cpp scanner.cpp -o out.out
+	g++ -std=c++0x main.cpp scanner.cpp parser.cpp -o out.out
 run:
 	clear
 	./out.out file.cm
