@@ -105,20 +105,20 @@ char Scanner::getLetter()
 }
 int Scanner::isToken(std::string str)
 {
-	std::regex letter("([a-zA-z]+)");
-	std::regex digit("([0-9]+)");
-	std::regex symbolPlus("\\+");
-	std::regex symbolMinus("\\-");
-	std::regex symbolStar("\\*");
-	std::regex symbolSlash("\\/");
-	std::regex symbolComp("\\<|\\>|\\<\\=|\\>\\=|\\=\\=|\\!\\=");
-	std::regex symbolEqual("\\=");
-	std::regex symbolSemi("\\;");
-	std::regex symbolComma("\\,");
-	std::regex symbolPar("\\(|\\)");
-	std::regex symbolBra("\\[|\\]");
-	std::regex symbolCurl("\\{|\\}");
-	std::regex symbolComment("\\/\\*|\\*\\/");
+	std::regex letter("^[a-zA-Z]+$");
+	std::regex digit("^[0-9]+$");
+	std::regex symbolPlus("^\\+$");
+	std::regex symbolMinus("^\\-$");
+	std::regex symbolStar("^\\*$");
+	std::regex symbolSlash("^\\/$");
+	std::regex symbolComp("^\\<|\\>|\\<\\=|\\>\\=|\\=\\=|\\!\\=$");
+	std::regex symbolEqual("^\\=$");
+	std::regex symbolSemi("^\\;$");
+	std::regex symbolComma("^\\,$");
+	std::regex symbolPar("^\\(|\\)$");
+	std::regex symbolBra("^\\[|\\]$");
+	std::regex symbolCurl("^\\{|\\}$");
+	std::regex symbolComment("^\\/\\*|\\*\\/$");
 
 	if(str == " " || str == "\t" ||str == "\n")
 		return 20;
