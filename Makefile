@@ -3,12 +3,12 @@ all:
 #	make run
 	make debug
 compile:
-	g++ main.cpp scanner.cpp -o out.out
+	g++ -std=c++0x main.cpp scanner.cpp -o out.out
 run:
 	clear
-	./out.out
+	./out.out test.txt
 debug:
 	clear
-	./out.out debug
+	./out.out test.txt debug
 clean:
 	rm -rf *.out

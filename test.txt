@@ -1,3 +1,6 @@
 potato
 is
 fruit
+int a = 13
+?! 34
+4 + 5
