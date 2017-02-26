@@ -19,6 +19,7 @@
 #define SYMBOLBRA 12
 #define SYMBOLCURL 13
 #define SYMBOLCOMMENT 14
+#define KEYWORDS 15
 struct Token{
 	int type;
 	int value;

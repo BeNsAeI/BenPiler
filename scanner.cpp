@@ -119,9 +119,12 @@ int Scanner::isToken(std::string str)
 	std::regex symbolBra("^\\[|\\]$");
 	std::regex symbolCurl("^\\{|\\}$");
 	std::regex symbolComment("^\\/\\*|\\*\\/$");
+	std::regex keywords("^else|if|int|return|void|while$");
 
 	if(str == " " || str == "\t" ||str == "\n")
 		return 20;
+	if(regex_match(str,keywords))
+		return KEYWORDS;
 	if(regex_match(str,letter))
 		return LETTER;
 	if(regex_match(str,digit))
