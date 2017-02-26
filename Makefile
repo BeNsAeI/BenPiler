@@ -6,9 +6,11 @@ compile:
 	g++ -std=c++0x main.cpp scanner.cpp -o out.out
 run:
 	clear
-	./out.out test.txt
+	./out.out file.cm
 debug:
 	clear
-	./out.out test.txt debug
+	./out.out file.cm debug
+valG:
+	valgrind -v ./out.out test.txt debug
 clean:
 	rm -rf *.out
