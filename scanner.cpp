@@ -16,6 +16,7 @@ Scanner::Scanner(std::string path,bool debug)
 	fin = fopen(filePath, &mode);
 	if (fin == NULL) {
 		printf("Can't open input file\n");
+		exit(1);
 	}
 	if(DEBUG)
 	{
