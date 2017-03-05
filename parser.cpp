@@ -38,7 +38,7 @@ void Parser::match(int expectedType)
 {
 	if(currentType == expectedType)
 	{
-		currentToken = nextToken();
+		currentToken = currentToken = nextToken();
 		std::cout << currentToken.str<<std::endl;
 		currentType = currentToken.type;
 		currentLine = currentToken.line;
@@ -125,15 +125,15 @@ struct TreeNode * Parser::declaration()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	struct Token typeSpec = nextToken();
+	struct Token typeSpec = currentToken = nextToken();
 	node->lineNumber = typeSpec.line;
 	if(typeSpec.str == "void")
 		node->typeSpecifier = VOID;
 	else
 		node->typeSpecifier = INT;
-	struct Token id = nextToken();
+	struct Token id = currentToken = nextToken();
 	node->sValue = id.str;
-	struct Token next = nextToken();
+	struct Token next = currentToken = nextToken();
 	struct Token arr_val;
 	struct Token closure;
 	struct Token semi;
@@ -150,13 +150,13 @@ struct TreeNode * Parser::declaration()
 		case '[':
 			node->nodeType = ARR;
 			node->rename = "tmp" + SSTR(unique++);
-			arr_val = nextToken();
+			arr_val = currentToken = nextToken();
 			if(DEBUG)
 				std::cout << arr_val.str << " ";
 			if(arr_val.str[0] != ']')
 			{
 				node->nValue = atoi((const char *)arr_val.str.c_str());
-				closure = nextToken();
+				closure = currentToken = nextToken();
 				if(DEBUG)
 					std::cout << closure.str << " ";
 				if(closure.str[0] != ']')
@@ -166,7 +166,7 @@ struct TreeNode * Parser::declaration()
 					exit(-1);
 				}
 			}
-			semi = nextToken();
+			semi = currentToken = nextToken();
 			if(DEBUG)
 				std::cout << semi.str;
 			if(semi.str[0] != ';')
@@ -221,15 +221,15 @@ struct TreeNode * Parser::param()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	struct Token typeSpec = nextToken();
+	struct Token typeSpec = currentToken = nextToken();
 	node->lineNumber = typeSpec.line;
 	if(typeSpec.str == "void")
 		node->typeSpecifier = VOID;
 	else
 		node->typeSpecifier = INT;
-	struct Token id = nextToken();
+	struct Token id = currentToken = nextToken();
 	node->sValue = id.str;
-	struct Token next = nextToken();
+	struct Token next = currentToken = nextToken();
 	struct Token arr_val;
 	struct Token closure;
 	struct Token semi;
@@ -244,13 +244,13 @@ struct TreeNode * Parser::param()
 		case '[':
 			node->nodeType = ARR;
 			node->rename = "tmp" + SSTR(unique++);
-			arr_val = nextToken();
+			arr_val = currentToken = nextToken();
 			if(DEBUG)
 				std::cout << arr_val.str << " ";
 			if(arr_val.str[0] != ']')
 			{
 				node->nValue = atoi((const char *)arr_val.str.c_str());
-				closure = nextToken();
+				closure = currentToken = nextToken();
 				if(DEBUG)
 					std::cout << closure.str << " ";
 				if(closure.str[0] != ']')
@@ -260,7 +260,7 @@ struct TreeNode * Parser::param()
 					exit(-1);
 				}
 			}
-			semi = nextToken();
+			semi = currentToken = nextToken();
 			if(DEBUG)
 				std::cout << semi.str;
 			if(semi.str[0] != ',' && semi.str[0]!= ')')
@@ -285,10 +285,28 @@ struct TreeNode * Parser::compound_stmt()
 {
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	currentToken = nextToken();
+	if(currentToken.str[0] != '{')
+	{
+		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \"{\" is missing." << std::endl;
+		exit(-1);
+	}
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
+	struct TreeNode * tmp = node;
+	struct TreeNode * tmp2 = local_declaration();
+	while(tmp2 != NULL)
+	{
+		tmp->sibling = tmp2;
+		tmp = tmp->sibling;
+		tmp2 = local_declaration();
+	}
+	node->c1 = node->sibling;
+	node->sibling = NULL;
+	node->c2 = statement_list();
 	return node;
 }
 struct TreeNode * Parser::local_declaration()
@@ -299,16 +317,66 @@ struct TreeNode * Parser::local_declaration()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	return node;
-}
-struct TreeNode * Parser::local_declaration_P()
-{
-	struct TreeNode * node = new struct TreeNode;
-	Trash.push_back(node);
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->sibling = NULL;
+	struct Token typeSpec = currentToken = nextToken();
+	std::cout << typeSpec.str << std::endl;
+	if(typeSpec.type != KEYWORDS)
+		return NULL;
+	node->lineNumber = typeSpec.line;
+	if(typeSpec.str == "void")
+		node->typeSpecifier = VOID;
+	else
+		node->typeSpecifier = INT;
+	struct Token id = currentToken = nextToken();
+	node->sValue = id.str;
+	struct Token next = currentToken = nextToken();
+	struct Token arr_val;
+	struct Token closure;
+	struct Token semi;
+	if(DEBUG)
+		std::cout << std::endl << typeSpec.str << " " << id.str << " " << next.str << " ";
+	switch(next.str[0])
+	{
+		case ';':
+			node->nodeType = VAR;
+			node->rename = "tmp" + SSTR(unique++);
+			if(DEBUG)
+				std::cout <<std::endl;
+			break;
+		case '[':
+			node->nodeType = ARR;
+			node->rename = "tmp" + SSTR(unique++);
+			arr_val = currentToken = nextToken();
+			if(DEBUG)
+				std::cout << arr_val.str << " ";
+			if(arr_val.str[0] != ']')
+			{
+				node->nValue = atoi((const char *)arr_val.str.c_str());
+				closure = currentToken = nextToken();
+				if(DEBUG)
+					std::cout << closure.str << " ";
+				if(closure.str[0] != ']')
+				{
+					printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+					std::cout << "\"" << closure.str << "\"" << " Unexpected token. did you mean \"]\"?" << std::endl;
+					exit(-1);
+				}
+			}
+			semi = currentToken = nextToken();
+			if(DEBUG)
+				std::cout << semi.str;
+			if(semi.str[0] != ';')
+			{
+				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+				std::cout << "\"" << semi.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
+				exit(-1);
+			}
+			break;
+		default:
+			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+			std::cout << "\"" << next.str << "\"" << " Unexpected token." << std::endl;
+			exit(-1);
+			break;
+	}
 	return node;
 }
 struct TreeNode * Parser::statement_list()
@@ -319,16 +387,14 @@ struct TreeNode * Parser::statement_list()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	return node;
-}
-struct TreeNode * Parser::statement_list_P()
-{
-	struct TreeNode * node = new struct TreeNode;
-	Trash.push_back(node);
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->sibling = NULL;
+	struct TreeNode * tmp = node;
+	struct TreeNode * tmp2 = statement();
+	while(tmp2 != NULL)
+	{
+		tmp->sibling = tmp2;
+		tmp = tmp->sibling;
+		tmp2 = statement();
+	}
 	return node;
 }
 struct TreeNode * Parser::statement()
