@@ -6,6 +6,7 @@
 #define SSTR( x ) dynamic_cast< std::ostringstream & >( \
 	( std::ostringstream() << std::dec << x ) ).str()
 
+#define NONTOKEN 0
 #define LETTER 1
 #define DIGIT 2
 #define SYMBOLPLUS 3

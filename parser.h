@@ -67,7 +67,7 @@ private:
 	struct TreeNode * statement_list_P();
 	struct TreeNode * statement();
 	struct TreeNode * expression_stmt();
-	struct TreeNode * section_stmt();
+	struct TreeNode * selection_stmt();
 	struct TreeNode * iteration_stmt();
 	struct TreeNode * return_stmt();
 	struct TreeNode * expression();

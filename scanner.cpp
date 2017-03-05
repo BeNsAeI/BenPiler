@@ -132,7 +132,7 @@ int Scanner::isToken(std::string str)
 	std::regex symbolBra("^\\[|\\]$");
 	std::regex symbolCurl("^\\{|\\}$");
 	std::regex symbolComment("^\\/\\*|\\*\\/$");
-	std::regex keywords("^else|if|int|return|void|while$");
+	std::regex keywords("^else|if|int|return|void|while|call|read|write$");
 	std::regex read("^read$");
 	std::regex write("^write$");
 
