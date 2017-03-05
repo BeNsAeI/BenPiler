@@ -5,6 +5,12 @@
 
 #include "token.h"
 
+#define VOID 1
+#define INT 2
+#define VAR 1
+#define ARR 2
+#define FUN 3
+
 struct TreeNode;
 
 struct TreeNode{
@@ -19,7 +25,7 @@ struct TreeNode{
 	struct TreeNode * c1;
 	struct TreeNode * c2;
 	struct TreeNode * c3;
-	struct TreeNode * sibiling;
+	struct TreeNode * sibling;
 };
 
 
@@ -32,6 +38,8 @@ public:
 	~Parser();
 private:
 	bool DEBUG;
+	unsigned int unique;
+	std::vector<struct TreeNode *> Trash;
 	void match(int expectedType);
 	std::vector<struct Token> Tokens;
 	struct Token nextToken();
@@ -40,18 +48,23 @@ private:
 	int currentType,currentLine;
 	struct TreeNode * read_statement();
 	struct TreeNode * additiveExpression();
+	struct TreeNode * additiveExpression_P();
 	struct TreeNode * program();
 	struct TreeNode * declaration_list();
+	struct TreeNode * declaration_list_P();
 	struct TreeNode * declaration();
 	struct TreeNode * var_declaration();
 	struct TreeNode * type_specifier();
 	struct TreeNode * fun_declaration();
 	struct TreeNode * params();
 	struct TreeNode * param_list();
+	struct TreeNode * param_list_P();
 	struct TreeNode * param();
 	struct TreeNode * compound_stmt();
 	struct TreeNode * local_declaration();
+	struct TreeNode * local_declaration_P();
 	struct TreeNode * statement_list();
+	struct TreeNode * statement_list_P();
 	struct TreeNode * statement();
 	struct TreeNode * expression_stmt();
 	struct TreeNode * section_stmt();
@@ -63,11 +76,13 @@ private:
 	struct TreeNode * relop();
 	struct TreeNode * addop();
 	struct TreeNode * term();
+	struct TreeNode * term_P();
 	struct TreeNode * mulop();
 	struct TreeNode * factor();
 	struct TreeNode * call();
 	struct TreeNode * args();
 	struct TreeNode * arg_list();
+	struct TreeNode * arg_list_P();
 protected:
 };
 

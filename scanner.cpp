@@ -36,7 +36,7 @@ void Scanner::tokenize()
 	std::string str;
 	char current;
 	struct Token currentToken;
-	while(index < file.size())
+	while((unsigned int)index < file.size())
 	{
 		current = getLetter();
 		if(current == '\n')
@@ -80,7 +80,7 @@ void Scanner::tokenize()
 				std::cout << currentToken.type << ", " << currentToken.value << ", " << currentToken.line << ", "<< currentToken.str << std::endl;
 			}
 		}else{
-			if((isToken(str)==0) &&(index < file.size())&&(file[index] == ' ' || file[index] == '\n' || file[index] == '\t'))
+			if((isToken(str)==0) &&((unsigned int)index < file.size())&&(file[index] == ' ' || file[index] == '\n' || file[index] == '\t'))
 			{
 				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,lineIndex);
 				std::cout << "\"" << str << "\"" << " is not defined." << std::endl;

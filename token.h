@@ -1,6 +1,7 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 #include <string>
+#include <sstream>
 
 #define SSTR( x ) dynamic_cast< std::ostringstream & >( \
 	( std::ostringstream() << std::dec << x ) ).str()

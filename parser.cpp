@@ -1,6 +1,9 @@
 #include<stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
 
 #include "color.h"
 #include "parser.h"
@@ -11,11 +14,13 @@ Parser::Parser(std::vector<struct Token> tokens,bool debug)
 	DEBUG = debug;
 	Tokens = tokens;
 	tokenIndex = Tokens.begin();
+	unique = 0;
 	if(DEBUG)
 	{
-		currentToken = *(tokenIndex);
-		currentType = tokenIndex->type;
-		match(tokenIndex->type);
+		//currentToken = *(tokenIndex);
+		//currentType = tokenIndex->type;
+		//match(tokenIndex->type);
+		program();
 	}
 }
 struct Token Parser::nextToken()
@@ -24,6 +29,10 @@ struct Token Parser::nextToken()
 	{
 		return *(tokenIndex++);
 	}
+	struct Token NON;
+	NON.type = 0;
+	NON.str = "NON";
+	return NON;
 }
 void Parser::match(int expectedType)
 {
@@ -65,92 +74,449 @@ struct TreeNode * Parser::additiveExpression()
 	}
 	return t;
 }
+struct TreeNode * Parser::additiveExpression_P()
+{
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->sibling = NULL;
+	return node;
+}
 struct TreeNode * Parser::program()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->lineNumber = 0;
+	node->nValue = -1;
+	node->sValue = "Program";
+	node->nodeType = -1;
+	node->typeSpecifier = -1;
+	node->rename = "NULL";
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = declaration_list();
+	return node;
 }
 struct TreeNode * Parser::declaration_list()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	struct TreeNode * tmp = node;
+	struct TreeNode * tmp2 = declaration();
+	while(tmp2 != NULL)
+	{
+		tmp->sibling = tmp2;
+		tmp = tmp->sibling;
+		tmp2 = declaration();
+	}
+	return node;
 }
 struct TreeNode * Parser::declaration()
 {
-}
-struct TreeNode * Parser::var_declaration()
-{
-}
-struct TreeNode * Parser::type_specifier()
-{
-}
-struct TreeNode * Parser::fun_declaration()
-{
-}
-struct TreeNode * Parser::params()
-{
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	struct Token typeSpec = nextToken();
+	node->lineNumber = typeSpec.line;
+	if(typeSpec.str == "void")
+		node->typeSpecifier = VOID;
+	else
+		node->typeSpecifier = INT;
+	struct Token id = nextToken();
+	node->sValue = id.str;
+	struct Token next = nextToken();
+	struct Token arr_val;
+	struct Token closure;
+	struct Token semi;
+	if(DEBUG)
+		std::cout << std::endl << typeSpec.str << " " << id.str << " " << next.str << " ";
+	switch(next.str[0])
+	{
+		case ';':
+			node->nodeType = VAR;
+			node->rename = "tmp" + SSTR(unique++);
+			if(DEBUG)
+				std::cout <<std::endl;
+			break;
+		case '[':
+			node->nodeType = ARR;
+			node->rename = "tmp" + SSTR(unique++);
+			arr_val = nextToken();
+			if(DEBUG)
+				std::cout << arr_val.str << " ";
+			if(arr_val.str[0] != ']')
+			{
+				node->nValue = atoi((const char *)arr_val.str.c_str());
+				closure = nextToken();
+				if(DEBUG)
+					std::cout << closure.str << " ";
+				if(closure.str[0] != ']')
+				{
+					printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+					std::cout << "\"" << closure.str << "\"" << " Unexpected token. did you mean \"]\"?" << std::endl;
+					exit(-1);
+				}
+			}
+			semi = nextToken();
+			if(DEBUG)
+				std::cout << semi.str;
+			if(semi.str[0] != ';')
+			{
+				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+				std::cout << "\"" << semi.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
+				exit(-1);
+			}
+			break;
+		case '(':
+			node->nodeType = FUN;
+			node->c1 = param_list();
+			if(DEBUG)
+				std::cout << std::endl;
+			node->c2 = compound_stmt();
+			break;
+		default:
+			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+			std::cout << "\"" << next.str << "\"" << " Unexpected token." << std::endl;
+			exit(-1);
+			break;
+	}
+	return node;
 }
 struct TreeNode * Parser::param_list()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	struct TreeNode * tmp = node;
+	struct TreeNode * tmp2 = param();
+	while(tmp2 != NULL)
+	{
+		tmp->sibling = tmp2;
+		tmp = tmp->sibling;
+		tmp2 = param();
+	}
+	return node;
 }
 struct TreeNode * Parser::param()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	struct Token typeSpec = nextToken();
+	node->lineNumber = typeSpec.line;
+	if(typeSpec.str == "void")
+		node->typeSpecifier = VOID;
+	else
+		node->typeSpecifier = INT;
+	struct Token id = nextToken();
+	node->sValue = id.str;
+	struct Token next = nextToken();
+	struct Token arr_val;
+	struct Token closure;
+	struct Token semi;
+	if(DEBUG)
+		std::cout << typeSpec.str << " " << id.str << " " << next.str << " ";
+	switch(next.str[0])
+	{
+		case ',':
+			node->nodeType = VAR;
+			node->rename = "tmp" + SSTR(unique++);
+			break;
+		case '[':
+			node->nodeType = ARR;
+			node->rename = "tmp" + SSTR(unique++);
+			arr_val = nextToken();
+			if(DEBUG)
+				std::cout << arr_val.str << " ";
+			if(arr_val.str[0] != ']')
+			{
+				node->nValue = atoi((const char *)arr_val.str.c_str());
+				closure = nextToken();
+				if(DEBUG)
+					std::cout << closure.str << " ";
+				if(closure.str[0] != ']')
+				{
+					printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+					std::cout << "\"" << closure.str << "\"" << " Unexpected token. did you mean \"]\"?" << std::endl;
+					exit(-1);
+				}
+			}
+			semi = nextToken();
+			if(DEBUG)
+				std::cout << semi.str;
+			if(semi.str[0] != ',' && semi.str[0]!= ')')
+			{
+				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+				std::cout << "\"" << semi.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
+				exit(-1);
+			}
+			break;
+		case ')':
+			return NULL;
+			break;
+		default:
+			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,node->lineNumber);
+			std::cout << "\"" << next.str << "\"" << " Unexpected token." << std::endl;
+			exit(-1);
+			break;
+	}
+	return node;
 }
 struct TreeNode * Parser::compound_stmt()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::local_declaration()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
+}
+struct TreeNode * Parser::local_declaration_P()
+{
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::statement_list()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
+}
+struct TreeNode * Parser::statement_list_P()
+{
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::statement()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::expression_stmt()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::section_stmt()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::iteration_stmt()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::return_stmt()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::expression()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::var()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::simple_expressive()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::relop()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::addop()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::term()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
+}
+struct TreeNode * Parser::term_P()
+{
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::mulop()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::factor()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::call()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::args()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 struct TreeNode * Parser::arg_list()
 {
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	return node;
+}
+struct TreeNode * Parser::arg_list_P()
+{
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->c1 = NULL;
+	node->sibling = NULL;
+	return node;
 }
 Parser::~Parser()
 {
-
+	for(std::vector<struct TreeNode *>::iterator it = Trash.begin(); it != Trash.end(); ++it )
+	{
+		delete (*it);
+		Trash.erase(it);
+	}
 }
 
