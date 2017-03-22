@@ -652,8 +652,14 @@ struct TreeNode * Parser::additiveExpression()
 		}
 	}
 	// Additive_expression addop term || term
+	if (DEBUG)
+		std::cout << "-> Additive expression grabbing tokens at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	currentToken = nextToken();
+	if (DEBUG)
+		std::cout << "-> first token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	currentToken = nextToken();
+	if (DEBUG)
+		std::cout << "-> second token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	if (currentToken.str[0] == ';')
@@ -811,9 +817,35 @@ struct TreeNode * Parser::factor()
 		currentToken = nextToken();
 		return node;
 	}
-	if (DEBUG)
-		std::cout << "-> factor is interrupted at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	exit(0);
+	if (currentToken.type == DIGIT)
+	{
+		struct TreeNode * node = new struct TreeNode;
+		Trash.push_back(node);
+		node->c1 = NULL;
+		node->c2 = NULL;
+		node->c3 = NULL;
+		node->sibling = NULL();
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> factor returned as num at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
+		return node;
+	}
+	else()
+	{
+		struct TreeNode * node = new struct TreeNode;
+		Trash.push_back(node);
+		node->c1 = NULL;
+		node->c2 = NULL;
+		node->c3 = NULL;
+		node->sibling = call();
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> factor returned as num at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return node;
+	}
 }
 struct TreeNode * Parser::call()
 {
