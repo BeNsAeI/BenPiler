@@ -147,7 +147,7 @@ struct TreeNode * Parser::declaration()
 			if(semi.str[0] != ';')
 			{
 				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,semi.line);
-				std::cout << "\"" << semi.str << "\"" << " Unexpected tokenu. \";\" is missing." << std::endl;
+				std::cout << "\"" << semi.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
 				exit(-1);
 			}
 			break;
