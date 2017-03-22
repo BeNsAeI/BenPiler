@@ -591,13 +591,64 @@ struct TreeNode * Parser::var()
 {
 	if (DEBUG)
 		std::cout << "-> Var is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	currentToken = nextToken();
-	struct TreeNode * node = new struct TreeNode;
-	Trash.push_back(node);
-	node->c1 = NULL;
-	node->c2 = NULL;
-	node->c3 = NULL;
-	node->sibling = NULL;
+	struct Token id = currentToken = nextToken();
+	node->sValue = id.str;
+	struct Token next = currentToken = nextToken();
+	struct Token arr_val;
+	struct Token closure;
+	struct Token semi;
+	if (DEBUG)
+		std::cout << std::endl << typeSpec.str << " " << id.str << " " << next.str << " ";
+	switch (next.str[0])
+	{
+	case ';':
+		node->nodeType = VAR;
+		node->rename = "tmp" + SSTR(unique++);
+		if (DEBUG)
+			std::cout << std::endl;
+		break;
+	case '[':
+		node->nodeType = ARR;
+		node->rename = "tmp" + SSTR(unique++);
+		arr_val = currentToken = nextToken();
+		if (DEBUG)
+			std::cout << arr_val.str << " ";
+		if (arr_val.str[0] != ']')
+		{
+			node->nValue = atoi((const char *)arr_val.str.c_str());
+			closure = currentToken = nextToken();
+			if (DEBUG)
+				std::cout << closure.str << " ";
+			if (closure.str[0] != ']')
+			{
+				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, closure.line);
+				std::cout << "\"" << closure.str << "\"" << " Unexpected token. did you mean \"]\"?" << std::endl;
+				exit(-1);
+			}
+		}
+		semi = currentToken = nextToken();
+		if (DEBUG)
+			std::cout << semi.str;
+		if (semi.str[0] != ';')
+		{
+			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, semi.line);
+			std::cout << "\"" << semi.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
+			exit(-1);
+		}
+		break;
+	case '(':
+		node->nodeType = FUN;
+		node->c1 = param_list();
+		if (DEBUG)
+			std::cout << std::endl;
+		node->c2 = compound_stmt();
+		break;
+	default:
+		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, next.line);
+		std::cout << "\"" << next.str << "\"" << " Unexpected token." << std::endl;
+		exit(-1);
+		break;
+	}
 	return node;
 }
 struct TreeNode * Parser::simple_expressive()
