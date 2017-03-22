@@ -587,6 +587,9 @@ struct TreeNode * Parser::expression()
 		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> in else 3 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
 		if(currentToken.str[0] != ';')
 		{
 			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
