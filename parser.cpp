@@ -419,6 +419,9 @@ struct TreeNode * Parser::statement()
 	}
 	else if(currentToken.type == NONTOKEN)
 	{
+		tokenIndex=Tokens.end();
+		tokenIndex--;
+		currentToken = nextToken();
 		return NULL;
 	}
 	else
