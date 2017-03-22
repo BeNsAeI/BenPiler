@@ -258,11 +258,11 @@ struct TreeNode * Parser::param()
 }
 struct TreeNode * Parser::compound_stmt()
 {
-	if (DEBUG)
-		std::cout << "-> Compound Statment received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	currentToken = nextToken();
+	if (DEBUG)
+		std::cout << "-> Compound Statment received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '{')
 	{
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
@@ -291,15 +291,13 @@ struct TreeNode * Parser::compound_stmt()
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \"}\" is missing." << std::endl;
 		exit(-1);
 	}
-	currentToken = nextToken();
-	if (DEBUG)
-		std::cout << "-> Exiting Compound Statment with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	return node;
 }
 struct TreeNode * Parser::local_declaration()
 {
 	if (DEBUG)
-		std::cout << "-> Local declaration received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		std::cout << "-> local_declaration received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
@@ -307,22 +305,17 @@ struct TreeNode * Parser::local_declaration()
 	node->c3 = NULL;
 	node->sibling = NULL;
 	struct Token typeSpec = currentToken = nextToken();
-	if(DEBUG)
-		std::cout << "-> local declaration value for next is: " << typeSpec.str << std::endl;
+	std::cout << typeSpec.str << std::endl;
 	if(typeSpec.type != KEYWORDS)
 	{
 		tokenIndex--;
-		tokenIndex--;
-		currentToken = nextToken();
 		return NULL;
 	}
 	node->lineNumber = typeSpec.line;
-	if (typeSpec.str == "void")
+	if(typeSpec.str == "void")
 		node->typeSpecifier = VOID;
-	else if (typeSpec.str == "INT")
-		node->typeSpecifier = INT;
 	else
-		return NULL;
+		node->typeSpecifier = INT;
 	struct Token id = currentToken = nextToken();
 	node->sValue = id.str;
 	struct Token next = currentToken = nextToken();
@@ -512,19 +505,19 @@ struct TreeNode * Parser::return_stmt()
 struct TreeNode * Parser::expression()
 {
 	currentToken = nextToken();
-	if (DEBUG)
+	if (DEBUG && false)
 		std::cout << "-> before if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	currentToken = nextToken();
-	if (DEBUG)
+	if (DEBUG && false)
 		std::cout << "-> before if 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '=' && currentToken.type!= SYMBOLCOMP)// it is the = it returns
 	{
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> after if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			tokenIndex--;
 			tokenIndex--;
 			currentToken = nextToken();
-			if (DEBUG)
+			if (DEBUG && false)
 				std::cout << "-> Simple_epressive will be called: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			return simple_expressive();
 	}
@@ -533,7 +526,7 @@ struct TreeNode * Parser::expression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> in else 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 
 		if(currentToken.type != LETTER)
@@ -544,7 +537,7 @@ struct TreeNode * Parser::expression()
 		}
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
-		if (DEBUG)
+		if (DEBUG && false)
 		{
 			tokenIndex--;
 			currentToken = nextToken();
@@ -554,13 +547,13 @@ struct TreeNode * Parser::expression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> expression will be called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		node->c2 = expression();
 		node->c3 = NULL;
 		node->sibling = NULL;
 		//currentToken = nextToken();
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> in else 4 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		if(currentToken.str[0] != ';' && currentToken.str[0] != ')')
 		{
