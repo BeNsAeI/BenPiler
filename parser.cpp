@@ -648,7 +648,7 @@ struct TreeNode * Parser::additiveExpression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (currentToken.str[0] != '=')
+		if (currentToken.str[0] != '=' && currentToken.str[0] != '<' && currentToken.str[0] != '>')
 		{
 			currentToken = nextToken();
 			if (DEBUG)
@@ -673,7 +673,7 @@ struct TreeNode * Parser::additiveExpression()
 		std::cout << "-> second token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
-	if (currentToken.str[0] == ';')
+	if (currentToken.str[0] == ';' || currentToken.str[0] == ')')
 	{
 		tokenIndex--;
 		tokenIndex--;
