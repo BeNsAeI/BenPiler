@@ -592,6 +592,9 @@ struct TreeNode * Parser::expression()
 }
 struct TreeNode * Parser::var()
 {
+	if (DEBUG)
+		std::cout << "-> Var is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
@@ -604,6 +607,7 @@ struct TreeNode * Parser::simple_expressive()
 {
 	if(DEBUG)
 		std::cout << "-> Simple expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;	
+	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	// Additive-expr relop Additive-expr; | Additive-expr;
 	Trash.push_back(node);
