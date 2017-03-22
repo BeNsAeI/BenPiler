@@ -288,6 +288,7 @@ struct TreeNode * Parser::compound_stmt()
 	{
 		tokenIndex = Tokens.end();
 		tokenIndex--;
+		currentToken = nextToken();
 	}
 	if(currentToken.str[0] != '}')
 	{
