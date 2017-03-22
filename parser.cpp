@@ -291,7 +291,6 @@ struct TreeNode * Parser::compound_stmt()
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \"}\" is missing." << std::endl;
 		exit(-1);
 	}
-	currentToken = nextToken();
 	return node;
 }
 struct TreeNode * Parser::local_declaration()
@@ -382,7 +381,7 @@ struct TreeNode * Parser::statement_list()
 	node->sibling = NULL;
 	struct TreeNode * tmp = node;
 	struct TreeNode * tmp2 = statement();
-	while(tmp2 != NULL)
+	while(tmp2 != NULL && tokenIndex!=Tokens.end())
 	{
 		tmp->sibling = tmp2;
 		tmp = tmp->sibling;
