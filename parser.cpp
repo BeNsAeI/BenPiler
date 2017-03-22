@@ -423,7 +423,7 @@ struct TreeNode * Parser::statement()
 	}
 	else
 	{
-		if (currentToken.str[0] == ';' || currentToken.str[0] == '}')
+		if (currentToken.str[0] == ';' || currentToken.str[0] == '}' || currentToken.type==NONTOKEN)
 		{
 			return statement();
 		}
