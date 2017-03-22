@@ -528,7 +528,7 @@ struct TreeNode * Parser::return_stmt()
 struct TreeNode * Parser::expression()
 {
 	currentToken = nextToken();
-	currentToken = nextToken();
+	//currentToken = nextToken();
 	if(currentToken.str[0] != '=')// it is the = it returns
 	{
 		if (DEBUG)
