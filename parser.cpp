@@ -589,6 +589,8 @@ struct TreeNode * Parser::var()
 	case '<':
 	case '>':
 	case '!':
+	case ')':
+	case '}':
 	case '=':
 		node->nodeType = VAR;
 		node->rename = "tmp" + SSTR(unique++);
