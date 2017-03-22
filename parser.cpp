@@ -650,17 +650,36 @@ struct TreeNode * Parser::additiveExpression()
 			exit(-1);
 		}
 	}
+	// Additive_expression addop term || term
+	currentToken = nextToken();
 	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
-	node->c1 = NULL;
-	node->c2 = NULL;
-	node->c3 = NULL;
-	node->sibling = NULL;
-	currentToken = nextToken();
-	if (DEBUG)
-		std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	return node;
+	if (currentToken.str[0] == ';')
+	{
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
+		node->c1 = term();
+		node->c2 = NULL;
+		node->c3 = NULL;
+		node->sibling = NULL;
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return node;
+	}
+	else
+	{
+		node->c1 = additiveExpression();
+		node->c2 = addop();
+		node->c3 = term();
+		node->sibling = NULL;
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return node;
+	}
 }
 struct TreeNode * Parser::relop()
 {
@@ -682,6 +701,8 @@ struct TreeNode * Parser::relop()
 }
 struct TreeNode * Parser::addop()
 {
+	if (DEBUG)
+		std::cout << "-> Addop is returning at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
@@ -692,6 +713,8 @@ struct TreeNode * Parser::addop()
 }
 struct TreeNode * Parser::term()
 {
+	if (DEBUG)
+		std::cout << "-> Term is called at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
