@@ -30,7 +30,7 @@ struct Token Parser::nextToken()
 		return *(tokenIndex++);
 	}
 	struct Token NON;
-	NON.type = 0;
+	NON.type = NONTOKEN;
 	NON.str = "NON";
 	return NON;
 }
@@ -631,7 +631,7 @@ struct TreeNode * Parser::additiveExpression()
 {
 	if (DEBUG)
 		std::cout << "-> Additive expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';')
+	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
 	{
 		tokenIndex--;
 		tokenIndex--;
