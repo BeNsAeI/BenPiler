@@ -258,17 +258,18 @@ struct TreeNode * Parser::param()
 }
 struct TreeNode * Parser::compound_stmt()
 {
+	if (DEBUG)
+		std::cout << "-> Compound Statment received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	currentToken = nextToken();
-	if (DEBUG)
-		std::cout << "-> Compound Statment received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '{')
 	{
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \"{\" is missing." << std::endl;
 		exit(-1);
 	}
+	currentToken = nextToken();
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
