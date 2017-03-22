@@ -385,7 +385,8 @@ struct TreeNode * Parser::statement_list()
 struct TreeNode * Parser::statement()
 {
 	currentToken = nextToken();
-
+	if(DEBUG)
+		std::cout << "-> Statment received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.type == KEYWORDS)
 	{
 		switch(currentToken.str[0])
@@ -499,10 +500,10 @@ struct TreeNode * Parser::return_stmt()
 struct TreeNode * Parser::expression()
 {
 	currentToken = nextToken();
-	if (DEBUG)
+	if (DEBUG && false)
 		std::cout << "-> before if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	currentToken = nextToken();
-	if (DEBUG)
+	if (DEBUG && false)
 		std::cout << "-> before if 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '=' && currentToken.type!= SYMBOLCOMP)// it is the = it returns
 	{
