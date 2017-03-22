@@ -713,7 +713,6 @@ struct TreeNode * Parser::relop()
 		return NULL;
 	}
 	currentToken = nextToken();
-	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
