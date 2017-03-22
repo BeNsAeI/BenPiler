@@ -606,10 +606,10 @@ struct TreeNode * Parser::var()
 				std::cout << "\"" << closure.str << "\"" << " Unexpected token. did you mean \"]\"?" << std::endl;
 				exit(-1);
 			}
-		}
-		else
-		{
-			currentToken = nextToken();
+			else
+			{
+				currentToken = nextToken();
+			}
 		}
 		break;
 	default:
