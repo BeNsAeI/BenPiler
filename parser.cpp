@@ -780,6 +780,7 @@ struct TreeNode * Parser::factor()
 		}
 	}
 	// (expression) || var || call || NUM
+	currentToken = nextToken();
 	if (DEBUG)
 		std::cout << "-> factor is interrupted at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	exit(0);
