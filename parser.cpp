@@ -552,6 +552,8 @@ struct TreeNode * Parser::expression()
 			node->c2 = NULL;
 			node->c3 = NULL;
 			node->sibling = NULL;
+			if (DEBUG)
+				std::cout << "-> Done at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		}
 	}
 	else
