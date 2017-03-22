@@ -560,7 +560,6 @@ struct TreeNode * Parser::expression()
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		tokenIndex--;
-		tokenIndex--;
 		if (DEBUG)
 		{
 			tokenIndex--;
