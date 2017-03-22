@@ -693,7 +693,6 @@ struct TreeNode * Parser::additiveExpression()
 		node->c2 = addop();
 		node->c3 = term();
 		node->sibling = NULL;
-		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
