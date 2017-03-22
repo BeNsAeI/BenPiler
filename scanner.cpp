@@ -48,13 +48,14 @@ void Scanner::tokenize()
 		std::string strNext = str + file[index];
 		if(str == "/*")
 		{
-			if (current == '\n')
-			{
-				++lineIndex;
-			}
 			while(true)
 			{
-				if(getLetter() == '*')
+				current = getLetter();
+				if (current == '\n')
+				{
+					currentToken.line = ++lineIndex;
+				}
+				if(current == '*')
 					if(file[index] == '/')
 						break;
 			}
