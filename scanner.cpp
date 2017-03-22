@@ -53,7 +53,7 @@ void Scanner::tokenize()
 				current = getLetter();
 				if (current == '\n')
 				{
-					currentToken.line = ++lineIndex;
+					++lineIndex;
 				}
 				if(current == '*')
 					if(file[index] == '/')
