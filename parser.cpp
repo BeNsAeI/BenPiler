@@ -806,6 +806,9 @@ struct TreeNode * Parser::factor()
 		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
 		return node;
 	}
 	if (DEBUG)
