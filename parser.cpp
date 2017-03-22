@@ -758,13 +758,57 @@ struct TreeNode * Parser::mulop()
 }
 struct TreeNode * Parser::factor()
 {
+	if (DEBUG)
+		std::cout << "-> factor is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	{
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
+		if (currentToken.str[0] != '=')
+		{
+			currentToken = nextToken();
+			if (DEBUG)
+				std::cout << "-> factor is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			return NULL;
+		}
+		else
+		{
+			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, currentToken.line);
+			std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. Unknown expression." << std::endl;
+			exit(-1);
+		}
+	}
+	// Additive_expression addop term || term
+	currentToken = nextToken();
+	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
-	node->c1 = NULL;
-	node->c2 = NULL;
-	node->c3 = NULL;
-	node->sibling = NULL;
-	return node;
+	if (currentToken.str[0] == ';')
+	{
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
+		node->c1 = NULL;
+		node->c2 = NULL;
+		node->c3 = NULL;
+		node->sibling = NULL;
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> factor is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return node;
+	}
+	else
+	{
+		node->c1 = additiveExpression();
+		node->c2 = addop();
+		node->c3 = term();
+		node->sibling = NULL;
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return node;
+	}
 }
 struct TreeNode * Parser::call()
 {
