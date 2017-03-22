@@ -623,7 +623,7 @@ struct TreeNode * Parser::simple_expressive()
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = additiveExpression();
-	node->c2 = relop;
+	node->c2 = relop();
 	node->c3 = additiveExpression();
 	node->sibling = NULL;
 	return node;
