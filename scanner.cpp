@@ -43,6 +43,8 @@ void Scanner::tokenize()
 		{
 			currentToken.line = ++lineIndex;
 			current = ' ';
+			if (DEBUG)
+				std::cout << "Line is: " << lineIndex << std::endl;
 		}
 		str = str+current;
 		std::string strNext = str + file[index];
