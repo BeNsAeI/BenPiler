@@ -723,6 +723,12 @@ struct TreeNode * Parser::addop()
 {
 	if (DEBUG)
 		std::cout << "-> Addop is returning at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	{
+		if (DEBUG)
+			std::cout << "-> Addop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return NULL;
+	}
 	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
@@ -737,6 +743,12 @@ struct TreeNode * Parser::term()
 	if (DEBUG)
 		std::cout << "-> Term is called at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	// factor mulop factor | factor
+	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	{
+		if (DEBUG)
+			std::cout << "-> Term is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return NULL;
+	}
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = factor();
