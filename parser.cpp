@@ -316,7 +316,7 @@ struct TreeNode * Parser::local_declaration()
 	node->lineNumber = typeSpec.line;
 	if (typeSpec.str == "void")
 		node->typeSpecifier = VOID;
-	else if
+	else if (typeSpec.str == "INT")
 		node->typeSpecifier = INT;
 	else
 		return NULL;
