@@ -732,6 +732,7 @@ struct TreeNode * Parser::addop()
 			std::cout << "-> Addop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return NULL;
 	}
+	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
@@ -779,6 +780,7 @@ struct TreeNode * Parser::mulop()
 			std::cout << "-> Mulop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return NULL;
 	}
+	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
