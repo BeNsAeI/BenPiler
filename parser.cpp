@@ -775,16 +775,6 @@ struct TreeNode * Parser::term()
 	node->sibling = NULL;
 	return node;
 }
-struct TreeNode * Parser::term_P()
-{
-	struct TreeNode * node = new struct TreeNode;
-	Trash.push_back(node);
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->sibling = NULL;
-	return node;
-}
 struct TreeNode * Parser::mulop()
 {
 	if (DEBUG)
@@ -808,7 +798,7 @@ struct TreeNode * Parser::factor()
 {
 	if (DEBUG)
 		std::cout << "-> factor is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
- if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.str[0] == ')' || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.str[0] == ')' || currentToken.type == NONTOKEN)
 	{
 		tokenIndex--;
 		tokenIndex--;
@@ -932,7 +922,6 @@ Parser::~Parser()
 	for(std::vector<struct TreeNode *>::iterator it = Trash.begin(); it != Trash.end(); ++it )
 	{
 		delete (*it);
-		//Trash.erase(it);
 	}
 }
 
