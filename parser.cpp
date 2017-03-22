@@ -304,7 +304,8 @@ struct TreeNode * Parser::local_declaration()
 	node->c3 = NULL;
 	node->sibling = NULL;
 	struct Token typeSpec = currentToken = nextToken();
-	std::cout << typeSpec.str << std::endl;
+	if(DEBUG)
+		std::cout << "-> local declaration value for next is: " << typeSpec.str << std::endl;
 	if(typeSpec.type != KEYWORDS)
 	{
 		tokenIndex--;
