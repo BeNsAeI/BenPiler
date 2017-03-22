@@ -298,7 +298,8 @@ struct TreeNode * Parser::local_declaration()
 {
 	if (DEBUG)
 		std::cout << "-> Local declaration received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-
+	if (currentToken.type == KEYWORDS)
+		return NULL;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
