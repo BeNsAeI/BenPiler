@@ -577,7 +577,8 @@ struct TreeNode * Parser::var()
 struct TreeNode * Parser::simple_expressive()
 {
 	if(DEBUG)
-		std::cout << "->Simple expression is raised. (VB tested)" << std::endl;
+		std::cout << "->Simple expression is raised at: " << currentToken.str << "." << std::endl;
+	
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
