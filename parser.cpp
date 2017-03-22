@@ -29,6 +29,7 @@ struct Token Parser::nextToken()
 	{
 		return *(tokenIndex++);
 	}
+	return *(Tokens.end());
 	struct Token NON;
 	NON.type = NONTOKEN;
 	NON.str = "NON";
@@ -284,12 +285,6 @@ struct TreeNode * Parser::compound_stmt()
 	node->c1 = node->sibling;
 	node->sibling = NULL;
 	node->c2 = statement_list();
-	if (currentToken.type == NONTOKEN)
-	{
-		tokenIndex = Tokens.end();
-		tokenIndex--;
-		currentToken = nextToken();
-	}
 	if(currentToken.str[0] != '}')
 	{
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
