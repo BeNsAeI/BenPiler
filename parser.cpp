@@ -269,7 +269,6 @@ struct TreeNode * Parser::compound_stmt()
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \"{\" is missing." << std::endl;
 		exit(-1);
 	}
-	currentToken = nextToken();
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
