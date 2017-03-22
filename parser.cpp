@@ -568,18 +568,22 @@ struct TreeNode * Parser::expression()
 		}
 		node->c1 = var();
 		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> in else 3 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> in else 4 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		node->c2 = expression();
 		node->c3 = NULL;
 		node->sibling = NULL;
 		currentToken = nextToken();
 		if (DEBUG)
-			std::cout << "-> in else 3 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			std::cout << "-> in else 5 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
 		if (DEBUG)
-			std::cout << "-> in else 4 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			std::cout << "-> in else 6 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		if(currentToken.str[0] != ';')
 		{
 			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
