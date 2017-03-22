@@ -535,10 +535,12 @@ struct TreeNode * Parser::expression()
 	currentToken = nextToken();
 	if(currentToken.str[0] != '=')// it is the = it returns
 	{
+		tokenIndex--;
 		if (DEBUG)
-			std::cout << "->scale failed: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			std::cout << "->scale failed 1: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		tokenIndex--;
-		tokenIndex--;
+		if (DEBUG)
+			std::cout << "->scale failed 2: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return simple_expressive();
 	}
 	else
