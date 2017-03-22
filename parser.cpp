@@ -620,7 +620,7 @@ struct TreeNode * Parser::var()
 	}
 	std::cout << std::endl;
 	if (DEBUG)
-		std::cout << "-> Var returned with at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		std::cout << "-> Var returned with Token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	return node;
 }
 struct TreeNode * Parser::simple_expressive()
@@ -828,12 +828,8 @@ struct TreeNode * Parser::factor()
 		node->c2 = NULL;
 		node->c3 = NULL;
 		node->sibling = var();
-		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		tokenIndex--;
-		tokenIndex--;
-		currentToken = nextToken();
 		return node;
 	}
 	if (currentToken.type == DIGIT)
