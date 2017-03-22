@@ -585,6 +585,9 @@ struct TreeNode * Parser::simple_expressive()
 	currentToken = nextToken();
 	if (DEBUG)
 		std::cout << "->Simple expression is raised at: " << currentToken.str << "." << std::endl;
+	currentToken = nextToken();
+	if (DEBUG)
+		std::cout << "->Simple expression is raised at: " << currentToken.str << "." << std::endl;
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
