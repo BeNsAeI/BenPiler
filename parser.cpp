@@ -655,6 +655,7 @@ struct TreeNode * Parser::additiveExpression()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
+	currentToken = nextToken();
 	if (DEBUG)
 		std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	return node;
@@ -663,7 +664,6 @@ struct TreeNode * Parser::relop()
 {
 	if (DEBUG)
 		std::cout << "-> Relop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	currentToken = nextToken();
 	if (currentToken.str[0] == ';')
 	{
 		tokenIndex--;
