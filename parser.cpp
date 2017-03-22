@@ -727,7 +727,6 @@ struct TreeNode * Parser::addop()
 	{
 		if (DEBUG)
 			std::cout << "-> Addop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		currentToken = nextToken();
 		return NULL;
 	}
 	currentToken = nextToken();
