@@ -793,6 +793,7 @@ struct TreeNode * Parser::factor()
 		node->c2 = NULL;
 		node->c3 = NULL;
 		node->sibling = NULL;
+		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> factor is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
