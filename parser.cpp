@@ -643,7 +643,7 @@ struct TreeNode * Parser::additiveExpression()
 		}
 		else
 		{
-			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, next.line);
+			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, currentToken.line);
 			std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. Unknown expression." << std::endl;
 			exit(-1);
 		}
