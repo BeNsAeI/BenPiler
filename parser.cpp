@@ -348,11 +348,15 @@ struct TreeNode * Parser::local_declaration()
 					exit(-1);
 				}
 			}
-			break;
-		default:
-			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,next.line);
-			std::cout << "\"" << next.str << "\"" << " Unexpected token." << std::endl;
-			exit(-1);
+			semi = currentToken = nextToken();
+			if(DEBUG)
+				std::cout << semi.str;
+			if(semi.str[0] != ';')
+			{
+				printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,semi.line);
+				std::cout << "\"" << semi.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
+				exit(-1);
+			}
 			break;
 	}
 	return node;
