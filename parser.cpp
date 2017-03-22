@@ -648,7 +648,7 @@ struct TreeNode * Parser::additiveExpression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (currentToken.str[0] != '=' && currentToken.str[0] != '<' && currentToken.str[0] != '>')
+		if (currentToken.str[0] != '=' && currentToken.type != SYMBOLCOMP)
 		{
 			currentToken = nextToken();
 			if (DEBUG)
@@ -797,7 +797,7 @@ struct TreeNode * Parser::factor()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (currentToken.str[0] != '=')
+		if (currentToken.str[0] != '=' && currentToken.type != SYMBOLCOMP)
 		{
 			currentToken = nextToken();
 			if (DEBUG)
