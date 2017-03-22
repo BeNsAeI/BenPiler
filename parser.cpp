@@ -568,6 +568,7 @@ struct TreeNode * Parser::expression()
 		}
 		node->c1 = var();
 		currentToken = nextToken();
+		currentToken = nextToken();
 		node->c2 = expression();
 		node->c3 = NULL;
 		node->sibling = NULL;
