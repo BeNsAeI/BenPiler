@@ -746,7 +746,7 @@ struct TreeNode * Parser::term()
 	if (DEBUG)
 		std::cout << "-> Term is called at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	// factor mulop factor | factor
-	if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
 	{
 		if (DEBUG)
 			std::cout << "-> Term is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
@@ -774,7 +774,7 @@ struct TreeNode * Parser::mulop()
 {
 	if (DEBUG)
 		std::cout << "-> Mulop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.type == NONTOKEN)
 	{
 		if (DEBUG)
 			std::cout << "-> Mulop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
@@ -793,7 +793,7 @@ struct TreeNode * Parser::factor()
 {
 	if (DEBUG)
 		std::cout << "-> factor is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.type == NONTOKEN)
 	{
 		tokenIndex--;
 		tokenIndex--;
