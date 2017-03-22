@@ -648,7 +648,7 @@ struct TreeNode * Parser::additiveExpression()
 {
 	if (DEBUG)
 		std::cout << "-> Additive expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
 	{
 		tokenIndex--;
 		tokenIndex--;
@@ -711,7 +711,7 @@ struct TreeNode * Parser::relop()
 {
 	if (DEBUG)
 		std::cout << "-> Relop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
 	{
 		if (DEBUG)
 			std::cout << "-> Relop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
@@ -730,7 +730,8 @@ struct TreeNode * Parser::addop()
 {
 	if (DEBUG)
 		std::cout << "-> Addop is returning at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	//if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
 	{
 		if (DEBUG)
 			std::cout << "-> Addop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
@@ -750,7 +751,7 @@ struct TreeNode * Parser::term()
 	if (DEBUG)
 		std::cout << "-> Term is called at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	// factor mulop factor | factor
-	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
 	{
 		if (DEBUG)
 			std::cout << "-> Term is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
