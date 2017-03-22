@@ -833,7 +833,7 @@ struct TreeNode * Parser::factor()
 		currentToken = nextToken();
 		return node;
 	}
-	else()
+	else
 	{
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
