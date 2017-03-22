@@ -648,20 +648,17 @@ struct TreeNode * Parser::additiveExpression()
 			exit(-1);
 		}
 	}
-	TreeNode * t;
-	TreeNode *tmp;
-	//t = term();
-	while (currentType == SYMBOLPLUS || currentType == SYMBOLMINUS)
-	{
-		tmp = new struct TreeNode;
-		tmp->nodeType = currentType;
-		tmp->lineNumber = currentLine;
-		//	accept();
-		tmp->c1 = t;
-		t = tmp;
-		//	t->c2 = term();
-	}
-	return t;
+	currentToken = nextToken();
+	struct TreeNode * node = new struct TreeNode;
+	Trash.push_back(node);
+	node->c1 = NULL;
+	node->c2 = NULL;
+	node->c3 = NULL;
+	node->sibling = NULL;
+	if (DEBUG)
+		std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+	currentToken = nextToken();
+	return node;
 }
 struct TreeNode * Parser::relop()
 {
