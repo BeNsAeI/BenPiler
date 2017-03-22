@@ -381,7 +381,7 @@ struct TreeNode * Parser::statement_list()
 	node->sibling = NULL;
 	struct TreeNode * tmp = node;
 	struct TreeNode * tmp2 = statement();
-	while(tmp2 != NULL && tokenIndex!=Tokens.end())
+	while(tmp2 != NULL)
 	{
 		tmp->sibling = tmp2;
 		tmp = tmp->sibling;
@@ -425,12 +425,6 @@ struct TreeNode * Parser::statement()
 	{
 		if (currentToken.str[0] == ';' || currentToken.str[0] == '}')
 		{
-			if (currentToken.str[0] == '}')
-			{
-				tokenIndex--;
-				tokenIndex--;
-				currentToken = nextToken();
-			}
 			return statement();
 		}
 		else
