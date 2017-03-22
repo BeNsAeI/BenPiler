@@ -786,8 +786,8 @@ struct TreeNode * Parser::factor()
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		node->c1 = NULL;
-		node->c2 = NULL();
-		node->c3 = NULL();
+		node->c2 = NULL;
+		node->c3 = NULL;
 		node->sibling = expression();
 		currentToken = nextToken();
 		if (DEBUG)
@@ -799,8 +799,8 @@ struct TreeNode * Parser::factor()
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		node->c1 = NULL;
-		node->c2 = NULL();
-		node->c3 = NULL();
+		node->c2 = NULL;
+		node->c3 = NULL;
 		node->sibling = var();
 		currentToken = nextToken();
 		if (DEBUG)
