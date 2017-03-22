@@ -666,9 +666,6 @@ struct TreeNode * Parser::relop()
 		std::cout << "-> Relop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if (currentToken.str[0] == ';')
 	{
-		tokenIndex--;
-		tokenIndex--;
-		currentToken = nextToken();
 		return NULL;
 	}
 	struct TreeNode * node = new struct TreeNode;
