@@ -15,5 +15,9 @@ debug:
 	./out.out file.cm debug
 valG:
 	valgrind -v ./out.out test.txt debug
+git:
+	git add -A
+	git commit -m "VB fast commit"
+	git push
 clean:
 	rm -rf *.out
