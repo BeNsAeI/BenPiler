@@ -530,7 +530,7 @@ struct TreeNode * Parser::expression()
 	currentToken = nextToken();
 	if (DEBUG)
 		std::cout << "-> before if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-//	currentToken = nextToken();
+	currentToken = nextToken();
 	if (DEBUG)
 		std::cout << "-> before if 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '=')// it is the = it returns
