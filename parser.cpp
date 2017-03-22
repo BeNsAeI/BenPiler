@@ -591,7 +591,7 @@ struct TreeNode * Parser::var()
 {
 	if (DEBUG)
 		std::cout << "-> Var is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	currentToken = nextToken();
+	tokenIndex--;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
