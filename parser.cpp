@@ -582,6 +582,8 @@ struct TreeNode * Parser::expression()
 			std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
 			exit(-1);
 		}
+		if (DEBUG)
+			std::cout << "-> expression done with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
 }
