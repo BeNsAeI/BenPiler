@@ -507,7 +507,7 @@ struct TreeNode * Parser::return_stmt()
 struct TreeNode * Parser::expression()
 {
 	currentToken = nextToken();
-	if (DEBUG && false)
+	if (DEBUG)
 		std::cout << "-> before if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	currentToken = nextToken();
 	if (DEBUG && false)
