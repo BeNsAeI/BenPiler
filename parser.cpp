@@ -535,6 +535,8 @@ struct TreeNode * Parser::expression()
 		std::cout << "-> before if 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '=')// it is the = it returns
 	{
+		if (DEBUG)
+			std::cout << "-> after if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			tokenIndex--;
 			tokenIndex--;
 			currentToken = nextToken();
@@ -591,19 +593,17 @@ struct TreeNode * Parser::var()
 {
 	if (DEBUG)
 		std::cout << "-> Var is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	tokenIndex--;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	struct Token id = currentToken = nextToken();
+	struct Token id = currentToken;
 	node->sValue = id.str;
 	struct Token next = currentToken = nextToken();
 	struct Token arr_val;
 	struct Token closure;
-	struct Token semi;
 	if (DEBUG)
 		std::cout << std::endl << id.str << " " << next.str << " ";
 	switch (next.str[0])
