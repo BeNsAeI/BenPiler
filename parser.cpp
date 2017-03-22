@@ -534,7 +534,7 @@ struct TreeNode * Parser::expression()
 		if (DEBUG)
 			std::cout << "->scale failed: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		tokenIndex--;
-		tokenIndex--;
+		//tokenIndex--;
 		return simple_expressive();
 	}
 	else
