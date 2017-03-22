@@ -32,7 +32,7 @@ Scanner::~Scanner()
 void Scanner::tokenize()
 {
 	checkpoint = 0;
-	lineIndex = 0;
+	lineIndex = -2;
 	std::string str;
 	char current;
 	struct Token currentToken;
