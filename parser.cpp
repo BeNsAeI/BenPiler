@@ -685,7 +685,7 @@ struct TreeNode * Parser::relop()
 {
 	if (DEBUG)
 		std::cout << "-> Relop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';')
+	if (currentToken.str[0] == ';' || currentToken.type == NONTOKEN)
 	{
 		if (DEBUG)
 			std::cout << "-> Relop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
