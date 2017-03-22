@@ -512,19 +512,19 @@ struct TreeNode * Parser::return_stmt()
 struct TreeNode * Parser::expression()
 {
 	currentToken = nextToken();
-	if (DEBUG && false)
+	if (DEBUG)
 		std::cout << "-> before if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	currentToken = nextToken();
-	if (DEBUG && false)
+	if (DEBUG)
 		std::cout << "-> before if 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '=' && currentToken.type!= SYMBOLCOMP)// it is the = it returns
 	{
-		if (DEBUG && false)
+		if (DEBUG)
 			std::cout << "-> after if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			tokenIndex--;
 			tokenIndex--;
 			currentToken = nextToken();
-			if (DEBUG && false)
+			if (DEBUG)
 				std::cout << "-> Simple_epressive will be called: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			return simple_expressive();
 	}
@@ -533,7 +533,7 @@ struct TreeNode * Parser::expression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (DEBUG && false)
+		if (DEBUG)
 			std::cout << "-> in else 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 
 		if(currentToken.type != LETTER)
@@ -544,7 +544,7 @@ struct TreeNode * Parser::expression()
 		}
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
-		if (DEBUG && false)
+		if (DEBUG)
 		{
 			tokenIndex--;
 			currentToken = nextToken();
@@ -554,13 +554,13 @@ struct TreeNode * Parser::expression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (DEBUG && false)
+		if (DEBUG)
 			std::cout << "-> expression will be called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		node->c2 = expression();
 		node->c3 = NULL;
 		node->sibling = NULL;
 		//currentToken = nextToken();
-		if (DEBUG && false)
+		if (DEBUG)
 			std::cout << "-> in else 4 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		if(currentToken.str[0] != ';' && currentToken.str[0] != ')')
 		{
