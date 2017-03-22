@@ -424,7 +424,6 @@ struct TreeNode * Parser::statement()
 	}
 	else if (currentToken.str[0] == '}')
 	{
-		tokenIndex--;
 		return NULL;
 	}
 	else if(currentToken.type == NONTOKEN)
