@@ -607,6 +607,10 @@ struct TreeNode * Parser::var()
 				exit(-1);
 			}
 		}
+		else
+		{
+			currentToken = nextToken();
+		}
 		break;
 	default:
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, next.line);
