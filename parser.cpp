@@ -580,7 +580,11 @@ struct TreeNode * Parser::simple_expressive()
 		std::cout << "->Simple expression is raised at: " << currentToken.str << "." << std::endl;
 	
 	struct TreeNode * node = new struct TreeNode;
+	// Additive-expr relop Additive-expr; | Additive-expr;
 	Trash.push_back(node);
+	currentToken = nextToken();
+	if (DEBUG)
+		std::cout << "->Simple expression is raised at: " << currentToken.str << "." << std::endl;
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
