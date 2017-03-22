@@ -549,7 +549,7 @@ struct TreeNode * Parser::expression()
 		tokenIndex--;
 		currentToken = nextToken();
 		if (DEBUG)
-			std::cout << "-> in else Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			std::cout << "-> in else 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 
 		if(currentToken.type != LETTER)
 		{
@@ -560,6 +560,12 @@ struct TreeNode * Parser::expression()
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		tokenIndex--;
+		if (DEBUG)
+		{
+			tokenIndex--;
+			currentToken = nextToken();
+			std::cout << "-> in else 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		}
 		node->c1 = var();
 		currentToken = nextToken();
 		node->c2 = expression();
