@@ -765,6 +765,7 @@ struct TreeNode * Parser::factor()
 	{
 		tokenIndex--;
 		tokenIndex--;
+		tokenIndex--;
 		currentToken = nextToken();
 		if (currentToken.str[0] != '=')
 		{
