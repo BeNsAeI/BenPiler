@@ -491,11 +491,11 @@ struct TreeNode * Parser::return_stmt()
 {
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	currentToken = nextToken();
 	node->c1 = expression();
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	currentToken = nextToken();
 	if(currentToken.str[0] != ';')
 	{
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
