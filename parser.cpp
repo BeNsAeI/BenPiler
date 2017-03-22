@@ -598,8 +598,6 @@ struct TreeNode * Parser::var()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	struct Token typeSpec = currentToken = nextToken();
-	node->lineNumber = typeSpec.line;
 	struct Token id = currentToken = nextToken();
 	node->sValue = id.str;
 	struct Token next = currentToken = nextToken();
