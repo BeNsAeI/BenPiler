@@ -840,6 +840,7 @@ struct TreeNode * Parser::factor()
 		return node;
 	}
 	tokenIndex--;
+	tokenIndex--;
 	currentToken = nextToken();
 	if (currentToken.type == DIGIT)
 	{
