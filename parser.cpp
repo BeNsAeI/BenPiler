@@ -906,16 +906,6 @@ struct TreeNode * Parser::arg_list()
 	node->sibling = NULL;
 	return node;
 }
-struct TreeNode * Parser::arg_list_P()
-{
-	struct TreeNode * node = new struct TreeNode;
-	Trash.push_back(node);
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->c1 = NULL;
-	node->sibling = NULL;
-	return node;
-}
 Parser::~Parser()
 {
 	std::cout << "Destructor called." << std::endl;
