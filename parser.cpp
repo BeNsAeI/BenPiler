@@ -551,7 +551,7 @@ struct TreeNode * Parser::expression()
 		//currentToken = nextToken();
 		if (DEBUG && false)
 			std::cout << "-> in else 4 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		if(currentToken.str[0] != ';')
+		if(currentToken.str[0] != ';' && currentToken.str[0] != ')')
 		{
 			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
 			std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
