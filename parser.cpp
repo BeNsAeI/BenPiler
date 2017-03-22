@@ -608,7 +608,7 @@ struct TreeNode * Parser::var()
 		std::cout << std::endl << id.str << " " << next.str << " ";
 	switch (next.str[0])
 	{
-	case ';':
+	case '=':
 		node->nodeType = VAR;
 		node->rename = "tmp" + SSTR(unique++);
 		if (DEBUG)
@@ -633,22 +633,6 @@ struct TreeNode * Parser::var()
 				exit(-1);
 			}
 		}
-		semi = currentToken = nextToken();
-		if (DEBUG)
-			std::cout << semi.str;
-		if (semi.str[0] != ';')
-		{
-			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, semi.line);
-			std::cout << "\"" << semi.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
-			exit(-1);
-		}
-		break;
-	case '(':
-		node->nodeType = FUN;
-		node->c1 = param_list();
-		if (DEBUG)
-			std::cout << std::endl;
-		node->c2 = compound_stmt();
 		break;
 	default:
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, next.line);
