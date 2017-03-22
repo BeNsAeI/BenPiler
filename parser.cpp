@@ -928,10 +928,11 @@ struct TreeNode * Parser::arg_list_P()
 }
 Parser::~Parser()
 {
+	std::cout << "Destructor called." << std::endl;
 	for(std::vector<struct TreeNode *>::iterator it = Trash.begin(); it != Trash.end(); ++it )
 	{
 		delete (*it);
-		Trash.erase(it);
+		//Trash.erase(it);
 	}
 }
 

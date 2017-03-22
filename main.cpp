@@ -42,7 +42,7 @@ int main (int argc, char ** argv)
 	}
 	Parser * myParser = new Parser(myScanner->Tokens,DEBUG);
 	cout << "cleaning out..." << endl;
-	//delete (myParser);
+	delete (myParser);
 	delete (myScanner);
 	cout << "Done!" << endl;
 	return 0;
