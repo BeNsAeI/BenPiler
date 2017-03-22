@@ -292,6 +292,8 @@ struct TreeNode * Parser::compound_stmt()
 		exit(-1);
 	}
 	currentToken = nextToken();
+	if (DEBUG)
+		std::cout << "-> Exiting Compound Statment with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	return node;
 }
 struct TreeNode * Parser::local_declaration()
