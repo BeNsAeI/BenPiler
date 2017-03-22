@@ -657,6 +657,7 @@ struct TreeNode * Parser::var()
 		exit(-1);
 		break;
 	}
+	currentToken = nextToken();
 	return node;
 }
 struct TreeNode * Parser::simple_expressive()
