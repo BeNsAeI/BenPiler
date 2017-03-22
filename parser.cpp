@@ -540,7 +540,8 @@ struct TreeNode * Parser::expression()
 		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		return simple_expressive();
+		//return simple_expressive();
+		return expression();
 	}
 	else
 	{
