@@ -567,6 +567,8 @@ struct TreeNode * Parser::expression()
 			std::cout << "-> Var will be called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		}
 		node->c1 = var();
+		tokenIndex--;
+		tokenIndex--;
 		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> expression will be called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
