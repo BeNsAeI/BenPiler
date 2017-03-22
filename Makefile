@@ -1,4 +1,5 @@
 all:
+	git pull
 	make compile
 #	make run
 	make debug
