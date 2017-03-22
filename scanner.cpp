@@ -107,7 +107,7 @@ void Scanner::readFile()
 			printf(ANSI_COLOR_RED "Recieved: " ANSI_COLOR_RESET);
 			std::cout << buffer << std::endl;
 		}
-		file = file + buffer;// +'\n';
+		file = file + buffer +'\n';
 	}
 	if(DEBUG)
 	{
