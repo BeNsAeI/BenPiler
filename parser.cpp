@@ -591,6 +591,7 @@ struct TreeNode * Parser::var()
 {
 	if (DEBUG)
 		std::cout << "-> Var is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
@@ -606,7 +607,7 @@ struct TreeNode * Parser::var()
 	struct Token closure;
 	struct Token semi;
 	if (DEBUG)
-		std::cout << std::endl  << id.str << " " << next.str << " ";
+		std::cout << std::endl << id.str << " " << next.str << " ";
 	switch (next.str[0])
 	{
 	case ';':
@@ -657,7 +658,6 @@ struct TreeNode * Parser::var()
 		exit(-1);
 		break;
 	}
-	currentToken = nextToken();
 	return node;
 }
 struct TreeNode * Parser::simple_expressive()
