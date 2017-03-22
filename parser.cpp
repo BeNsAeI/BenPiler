@@ -631,7 +631,6 @@ struct TreeNode * Parser::additiveExpression()
 {
 	if (DEBUG)
 		std::cout << "-> Additive expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	currentToken = nextToken();
 	if (currentToken.str[0] == ';')
 	{
 		tokenIndex--;
