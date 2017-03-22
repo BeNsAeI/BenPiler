@@ -614,6 +614,9 @@ struct TreeNode * Parser::var()
 		exit(-1);
 		break;
 	}
+	std::cout << std::endl;
+	if (DEBUG)
+		std::cout << "-> Var returned with at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	return node;
 }
 struct TreeNode * Parser::simple_expressive()
