@@ -29,7 +29,6 @@ struct Token Parser::nextToken()
 	{
 		return *(tokenIndex++);
 	}
-	return *(Tokens.end());
 	struct Token NON;
 	NON.type = NONTOKEN;
 	NON.str = "NON";
