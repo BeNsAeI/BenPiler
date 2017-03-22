@@ -102,10 +102,12 @@ struct TreeNode * Parser::declaration()
 	node->sibling = NULL;
 	struct Token typeSpec = currentToken = nextToken();
 	node->lineNumber = typeSpec.line;
-	if(typeSpec.str == "void")
+	if (typeSpec.str == "void")
 		node->typeSpecifier = VOID;
-	else
+	else if (typeSpec.str == "int")
 		node->typeSpecifier = INT;
+	else
+		return NULL;
 	struct Token id = currentToken = nextToken();
 	node->sValue = id.str;
 	struct Token next = currentToken = nextToken();
@@ -364,7 +366,7 @@ struct TreeNode * Parser::local_declaration()
 			break;
 		default:
 			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,next.line);
-			std::cout << "\"" << next.str << "\"" << " Unexpected tokenu." << std::endl;
+			std::cout << "\"" << next.str << "\"" << " Unexpected token." << std::endl;
 			exit(-1);
 			break;
 	}
@@ -598,6 +600,7 @@ struct TreeNode * Parser::var()
 	case '!':
 	case ')':
 	case '}':
+	case 'N':
 	case '=':
 		node->nodeType = VAR;
 		node->rename = "tmp" + SSTR(unique++);
