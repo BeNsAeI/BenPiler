@@ -469,14 +469,13 @@ struct TreeNode * Parser::iteration_stmt()
 		exit(-1);
 	}
 	node->c1 = expression();
-	currentToken = nextToken();
 	if(currentToken.str[0] != ')')
 	{
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \")\" is missing." << std::endl;
 		exit(-1);
 	}
-	node->c2 = compound_stmt();
+	node->c2 = statement();
 	node->c3 = NULL;
 	node->sibling = NULL;
 	return node;
