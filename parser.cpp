@@ -581,6 +581,7 @@ struct TreeNode * Parser::var()
 		std::cout << std::endl << id.str << " " << next.str << " ";
 	switch (next.str[0])
 	{
+	case ';':
 	case '=':
 		node->nodeType = VAR;
 		node->rename = "tmp" + SSTR(unique++);
