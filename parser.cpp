@@ -659,6 +659,7 @@ struct TreeNode * Parser::additiveExpression()
 	{
 		tokenIndex--;
 		tokenIndex--;
+		tokenIndex--;
 		currentToken = nextToken();
 		node->c1 = term();
 		node->c2 = NULL;
