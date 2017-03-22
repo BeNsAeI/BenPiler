@@ -783,9 +783,6 @@ struct TreeNode * Parser::factor()
 	currentToken = nextToken();
 	if (currentToken.str[0] == '(')
 	{
-		tokenIndex--;
-		tokenIndex--;
-		currentToken = nextToken();
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		node->c1 = NULL;
@@ -799,9 +796,6 @@ struct TreeNode * Parser::factor()
 	}
 	if (currentToken.type == VAR)
 	{
-		tokenIndex--;
-		tokenIndex--;
-		currentToken = nextToken();
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		node->c1 = NULL;
