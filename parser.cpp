@@ -261,6 +261,8 @@ struct TreeNode * Parser::compound_stmt()
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	currentToken = nextToken();
+	if (DEBUG)
+		std::cout << "-> Compound Statment received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '{')
 	{
 		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,currentToken.line);
