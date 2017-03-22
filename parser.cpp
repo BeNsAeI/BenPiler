@@ -558,7 +558,7 @@ struct TreeNode * Parser::expression()
 			exit(-1);
 		}
 		if (DEBUG)
-			std::cout << "-> expression done with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			std::cout << "-> expression done with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl << "_____" << std::endl;
 		return node;
 	}
 }
