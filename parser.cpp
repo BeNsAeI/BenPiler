@@ -530,7 +530,7 @@ struct TreeNode * Parser::expression()
 	currentToken = nextToken();
 	if (DEBUG)
 		std::cout << "-> before if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	currentToken = nextToken();
+//	currentToken = nextToken();
 	if (DEBUG)
 		std::cout << "-> before if 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '=')// it is the = it returns
@@ -539,7 +539,7 @@ struct TreeNode * Parser::expression()
 			tokenIndex--;
 			currentToken = nextToken();
 			if (DEBUG)
-				std::cout << "-> simple_epressive will be called: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+				std::cout << "-> Simple_epressive will be called: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			return simple_expressive();
 	}
 	else
@@ -600,7 +600,7 @@ struct TreeNode * Parser::var()
 struct TreeNode * Parser::simple_expressive()
 {
 	if(DEBUG)
-		std::cout << "->Simple expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;	
+		std::cout << "-> Simple expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;	
 	struct TreeNode * node = new struct TreeNode;
 	// Additive-expr relop Additive-expr; | Additive-expr;
 	Trash.push_back(node);
