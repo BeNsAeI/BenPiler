@@ -360,7 +360,7 @@ struct TreeNode * Parser::local_declaration()
 			break;
 		default:
 			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET,next.line);
-			std::cout << "\"" << next.str << "\"" << " Unexpected token." << std::endl;
+			std::cout << "\"" << next.str << "\"" << " Unexpected tokeni." << std::endl;
 			exit(-1);
 			break;
 	}
