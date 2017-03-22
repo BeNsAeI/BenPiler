@@ -314,10 +314,12 @@ struct TreeNode * Parser::local_declaration()
 		return NULL;
 	}
 	node->lineNumber = typeSpec.line;
-	if(typeSpec.str == "void")
+	if (typeSpec.str == "void")
 		node->typeSpecifier = VOID;
-	else
+	else if
 		node->typeSpecifier = INT;
+	else
+		return NULL;
 	struct Token id = currentToken = nextToken();
 	node->sValue = id.str;
 	struct Token next = currentToken = nextToken();
