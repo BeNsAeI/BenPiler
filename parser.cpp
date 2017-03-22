@@ -768,6 +768,7 @@ struct TreeNode * Parser::factor()
 		currentToken = nextToken();
 		if (currentToken.str[0] != '=')
 		{
+			tokenIndex--;
 			currentToken = nextToken();
 			if (DEBUG)
 				std::cout << "-> factor is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
