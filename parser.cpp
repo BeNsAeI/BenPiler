@@ -501,19 +501,19 @@ struct TreeNode * Parser::return_stmt()
 struct TreeNode * Parser::expression()
 {
 	currentToken = nextToken();
-	if (DEBUG)
+	if (DEBUG && false)
 		std::cout << "-> before if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	currentToken = nextToken();
-	if (DEBUG)
+	if (DEBUG && false)
 		std::cout << "-> before if 2 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '=')// it is the = it returns
 	{
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> after if 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			tokenIndex--;
 			tokenIndex--;
 			currentToken = nextToken();
-			if (DEBUG)
+			if (DEBUG && false)
 				std::cout << "-> Simple_epressive will be called: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 			return simple_expressive();
 	}
@@ -522,7 +522,7 @@ struct TreeNode * Parser::expression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> in else 1 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 
 		if(currentToken.type != LETTER)
@@ -533,7 +533,7 @@ struct TreeNode * Parser::expression()
 		}
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
-		if (DEBUG)
+		if (DEBUG && false)
 		{
 			tokenIndex--;
 			currentToken = nextToken();
@@ -543,13 +543,13 @@ struct TreeNode * Parser::expression()
 		tokenIndex--;
 		tokenIndex--;
 		currentToken = nextToken();
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> expression will be called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		node->c2 = expression();
 		node->c3 = NULL;
 		node->sibling = NULL;
 		//currentToken = nextToken();
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> in else 4 Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		if(currentToken.str[0] != ';')
 		{
@@ -557,7 +557,7 @@ struct TreeNode * Parser::expression()
 			std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \";\" is missing." << std::endl;
 			exit(-1);
 		}
-		if (DEBUG)
+		if (DEBUG && false)
 			std::cout << "-> expression done with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
