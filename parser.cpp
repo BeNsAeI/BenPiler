@@ -619,7 +619,6 @@ struct TreeNode * Parser::simple_expressive()
 {
 	if(DEBUG)
 		std::cout << "-> Simple expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;	
-	currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = additiveExpression();
@@ -627,6 +626,42 @@ struct TreeNode * Parser::simple_expressive()
 	node->c3 = additiveExpression();
 	node->sibling = NULL;
 	return node;
+}
+struct TreeNode * Parser::additiveExpression()
+{
+	if (DEBUG)
+		std::cout << "-> Additive expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+	if (currentToken.str[0] == ';')
+	{
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
+		if (currentToken.str[0] != '=')
+		{
+			currentToken = nextToken();
+			return NULL;
+		}
+		else
+		{
+			printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, next.line);
+			std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. Unknown expression." << std::endl;
+			exit(-1);
+		}
+	}
+	TreeNode * t;
+	TreeNode *tmp;
+	//t = term();
+	while (currentType == SYMBOLPLUS || currentType == SYMBOLMINUS)
+	{
+		tmp = new struct TreeNode;
+		tmp->nodeType = currentType;
+		tmp->lineNumber = currentLine;
+		//	accept();
+		tmp->c1 = t;
+		t = tmp;
+		//	t->c2 = term();
+	}
+	return t;
 }
 struct TreeNode * Parser::relop()
 {
@@ -647,32 +682,6 @@ struct TreeNode * Parser::relop()
 	node->c3 = NULL;
 	node->sibling = NULL;
 	return node;
-}
-struct TreeNode * Parser::additiveExpression()
-{
-	if (DEBUG)
-		std::cout << "-> Additive expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';')
-	{
-		tokenIndex--;
-		tokenIndex--;
-		currentToken = nextToken();
-		return NULL;
-	}
-	TreeNode * t;
-	TreeNode *tmp;
-	//t = term();
-	while (currentType == SYMBOLPLUS || currentType == SYMBOLMINUS)
-	{
-		tmp = new struct TreeNode;
-		tmp->nodeType = currentType;
-		tmp->lineNumber = currentLine;
-		//	accept();
-		tmp->c1 = t;
-		t = tmp;
-		//	t->c2 = term();
-	}
-	return t;
 }
 struct TreeNode * Parser::addop()
 {
