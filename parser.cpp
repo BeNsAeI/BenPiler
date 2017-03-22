@@ -781,6 +781,32 @@ struct TreeNode * Parser::factor()
 	}
 	// (expression) || var || call || NUM
 	currentToken = nextToken();
+	if (currentToken.str[0] == '(')
+	{
+		struct TreeNode * node = new struct TreeNode;
+		Trash.push_back(node);
+		node->c1 = NULL;
+		node->c2 = NULL();
+		node->c3 = NULL();
+		node->sibling = expression();
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> factor returned as (expression) Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return node;
+	}
+	if (currentToken.type == VAR)
+	{
+		struct TreeNode * node = new struct TreeNode;
+		Trash.push_back(node);
+		node->c1 = NULL;
+		node->c2 = NULL();
+		node->c3 = NULL();
+		node->sibling = var();
+		currentToken = nextToken();
+		if (DEBUG)
+			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		return node;
+	}
 	if (DEBUG)
 		std::cout << "-> factor is interrupted at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	exit(0);
