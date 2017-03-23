@@ -157,6 +157,8 @@ struct TreeNode * Parser::declaration()
 }
 struct TreeNode * Parser::param_list()
 {
+	if (DEBUG)
+		std::cout << "-> Parameter List called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->lineNumber = currentToken.line;
@@ -181,6 +183,9 @@ struct TreeNode * Parser::param_list()
 }
 struct TreeNode * Parser::param()
 {
+	if (DEBUG)
+		std::cout << "-> Paramter called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+
 	struct Token typeSpec = currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
