@@ -1080,6 +1080,12 @@ void Parser::Print(struct TreeNode * node, std::string title, int depth)
 void Parser::PrintSearchTree()
 {
 	printf(ANSI_COLOR_GREEN "Printing:\n" ANSI_COLOR_RESET);
+	struct TreeNode * O;
+	for (std::vector<struct TreeNode *>::iterator it = Trash.begin(); it != Trash.end(); ++it)
+	{
+		O = *it;
+		Print(O, "", 0);
+	}
 }
 Parser::~Parser()
 {
