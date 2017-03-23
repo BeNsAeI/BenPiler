@@ -115,7 +115,7 @@ struct TreeNode * Parser::declaration()
 			node->nodeType = VAR;
 			node->rename = "tmp" + SSTR(unique++);
 			if(DEBUG)
-				std::cout << "HERE" <<std::endl;
+				std::cout << std::endl;
 			break;
 		case '[':
 			node->nodeType = ARR;
@@ -317,8 +317,8 @@ struct TreeNode * Parser::local_declaration()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	
-	std::cout << typeSpec.str << std::endl;
+	if (DEBUG)
+		std::cout << typeSpec.str << std::endl;
 	if(typeSpec.type != KEYWORDS)
 	{
 		tokenIndex--;
