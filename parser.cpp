@@ -826,7 +826,7 @@ struct TreeNode * Parser::factor()
 	// (expression) || var || call || NUM
 	currentToken = nextToken();
 	if (DEBUG)
-		std::cout << "-> Factor assessing Token: " << currentToken.line << ": " << currentToken.str << ", " << currentToken.type << "." << std::endl;
+		std::cout << "-> factor assessing Token: " << currentToken.line << ": " << currentToken.str << ", " << currentToken.type << "." << std::endl;
 	if (currentToken.str[0] == '(')
 	{
 		struct TreeNode * node = new struct TreeNode;
@@ -852,11 +852,11 @@ struct TreeNode * Parser::factor()
 			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
-	else if (currentToken.type == DIGIT)
+	tokenIndex--;
+	tokenIndex--;
+	currentToken = nextToken();
+	if (currentToken.type == DIGIT)
 	{
-		tokenIndex--;
-		tokenIndex--;
-		currentToken = nextToken();
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		node->lineNumber = currentToken.line;
