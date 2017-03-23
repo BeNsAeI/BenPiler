@@ -727,7 +727,7 @@ struct TreeNode * Parser::relop()
 {
 	if (DEBUG)
 		std::cout << "-> Relop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN || currentToken.type == SYMBOLCOMP)
 	{
 		if (DEBUG)
 			std::cout << "-> Relop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
@@ -747,7 +747,7 @@ struct TreeNode * Parser::addop()
 	if (DEBUG)
 		std::cout << "-> Addop is returning at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	//if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
-	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN || currentToken.type == SYMBOLCOMP)
 	{
 		if (DEBUG)
 			std::cout << "-> Addop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
@@ -785,7 +785,7 @@ struct TreeNode * Parser::mulop()
 {
 	if (DEBUG)
 		std::cout << "-> Mulop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN || currentToken.type == SYMBOLCOMP)
 	{
 		if (DEBUG)
 			std::cout << "-> Mulop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
