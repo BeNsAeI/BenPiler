@@ -51,7 +51,6 @@ public:
 private:
 	bool DEBUG;
 	unsigned int unique;
-	int indent;
 	std::vector<struct TreeNode *> Trash;
 	std::vector<struct Token> Tokens;
 	struct Token nextToken();
