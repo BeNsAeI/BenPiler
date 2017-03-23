@@ -939,7 +939,12 @@ struct TreeNode * Parser::call()
 	node->c2 = arg_list();
 	node->c3 = NULL;
 	node->sibling = NULL;
-	exit(0);
+	if (currentToken.str[0] != ')')
+	{
+		printf(ANSI_COLOR_RED "error " ANSI_COLOR_RESET "at line " ANSI_COLOR_CYAN "%d: " ANSI_COLOR_RESET, currentToken.line);
+		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \")\" is missing." << std::endl;
+		exit(-1);
+	}
 	return node;
 }
 struct TreeNode * Parser::args()
@@ -972,7 +977,7 @@ struct TreeNode * Parser::arg_list()
 	node->c3 = NULL;
 	node->sibling = NULL;
 	struct TreeNode * tmp = node;
-	struct TreeNode * tmp2 = statement();
+	struct TreeNode * tmp2 = arg_list();
 	while (tmp2 != NULL)
 	{
 		tmp->sibling = tmp2;
