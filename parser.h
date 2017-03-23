@@ -58,7 +58,7 @@ private:
 	struct Token currentToken;
 	int currentType,currentLine;
 	int indent;
-	void Print(struct TreeNode * node, std::string title);
+	void Print(struct TreeNode * node, std::string title, int depth);
 	struct TreeNode * additiveExpression();
 	struct TreeNode * program();
 	struct TreeNode * declaration_list();
