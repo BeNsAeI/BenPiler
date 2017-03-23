@@ -17,9 +17,6 @@ Parser::Parser(std::vector<struct Token> tokens,bool debug)
 	unique = 0;
 	if(DEBUG)
 	{
-		//currentToken = *(tokenIndex);
-		//currentType = tokenIndex->type;
-		//match(tokenIndex->type);
 		program();
 	}
 }
