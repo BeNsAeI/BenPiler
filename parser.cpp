@@ -15,6 +15,7 @@ Parser::Parser(std::vector<struct Token> tokens,bool debug)
 	Tokens = tokens;
 	tokenIndex = Tokens.begin();
 	unique = 0;
+	std::cout << "Parsing..." << std::endl;
 	program();
 }
 struct Token Parser::nextToken()
