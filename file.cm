@@ -12,7 +12,7 @@ int minloc ( int a[], int low, int high ) {
 	 	if( a[ i ] < x ) {
 	 		x = a[ i ];
 	 		k = i;
-			y = function(argument);
+			y = function(argumentA, argumentB, argumentC);
 		}
 		 i = i + 1;
 	}
