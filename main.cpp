@@ -9,7 +9,6 @@
 #include "checker.h"
 #include "color.h"
 #include "token.h"
-#include "Printer.cpp"
 
 using std::cin;
 using std::cout;
