@@ -293,14 +293,14 @@ struct TreeNode * Parser::local_declaration()
 {
 	if (DEBUG)
 		std::cout << "-> local_declaration received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-
+	struct Token typeSpec = currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	struct Token typeSpec = currentToken = nextToken();
+	
 	std::cout << typeSpec.str << std::endl;
 	if(typeSpec.type != KEYWORDS)
 	{
@@ -371,6 +371,12 @@ struct TreeNode * Parser::statement_list()
 {
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	node->lineNumber = currentToken.line;
+	node->nValue = -1;
+	node->sValue = "Statement List";
+	node->nodeType = -1;
+	node->typeSpecifier = -1;
+	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
@@ -572,6 +578,12 @@ struct TreeNode * Parser::var()
 		std::cout << "-> Var is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	node->lineNumber = currentToken.line;
+	node->nValue = 0;
+	node->sValue = "Variable";
+	node->nodeType = -1;
+	node->typeSpecifier = -1;
+	node->rename = "tmpVar"+ unique.str;
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
