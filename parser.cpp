@@ -785,7 +785,7 @@ struct TreeNode * Parser::mulop()
 {
 	if (DEBUG)
 		std::cout << "-> Mulop is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.type == SYMBOLCURL || currentToken.type == SYMBOLPAR || currentToken.type == NONTOKEN)
 	{
 		if (DEBUG)
 			std::cout << "-> Mulop is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
