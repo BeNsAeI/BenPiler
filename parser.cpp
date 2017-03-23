@@ -162,6 +162,9 @@ struct TreeNode * Parser::declaration()
 			exit(-1);
 			break;
 	}
+	node->sibling = declaration_list();
+	Print(node, "Sibling");
+	indent++;
 	return node;
 }
 struct TreeNode * Parser::param_list()
@@ -189,7 +192,7 @@ struct TreeNode * Parser::param_list()
 		tmp2 = param();
 	}
 	return node;
-}
+}//c1
 struct TreeNode * Parser::param()
 {
 	if (DEBUG)
@@ -308,7 +311,7 @@ struct TreeNode * Parser::compound_stmt()
 		exit(-1);
 	}
 	return node;
-}
+}//c2
 struct TreeNode * Parser::local_declaration()
 {
 	if (DEBUG)
