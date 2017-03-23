@@ -69,6 +69,9 @@ struct TreeNode * Parser::declaration_list()
 }
 struct TreeNode * Parser::declaration()
 {
+	if (DEBUG)
+		std::cout << "-> Declaration called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+
 	if(currentToken.type == NONTOKEN)
 	return NULL;
 	struct Token typeSpec = currentToken = nextToken();
