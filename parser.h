@@ -2,6 +2,7 @@
 #define PARSER_H
 
 #include <vector>
+#include <string>
 
 #include "token.h"
 
@@ -56,7 +57,7 @@ private:
 	std::vector<struct Token>::iterator tokenIndex;
 	struct Token currentToken;
 	int currentType,currentLine;
-	void Print(struct TreeNode * node);
+	void Print(struct TreeNode * node, std::string title);
 	struct TreeNode * additiveExpression();
 	struct TreeNode * program();
 	struct TreeNode * declaration_list();

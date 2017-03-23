@@ -15,6 +15,7 @@ Parser::Parser(std::vector<struct Token> tokens,bool debug)
 	Tokens = tokens;
 	tokenIndex = Tokens.begin();
 	unique = 0;
+	indent = 0;
 	std::cout << std::endl << "Parsing..." << std::endl;
 	currentToken = *Tokens.begin();
 }
@@ -994,13 +995,76 @@ struct TreeNode * Parser::arg_list()
 	}
 	return node;
 }
-void Parser::Print(struct TreeNode * node)
+void Parser::Print(struct TreeNode * node, std::string title)
 {
-	//printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
+	std::string str = "";
+	for (int i = 0; i < indent; i++)
+	{
+		str = str + '\t';
+	}
+	printf(ANSI_COLOR_CYAN "%s%s\n" ANSI_COLOR_RESET, str, title);
+	printf(ANSI_COLOR_YELLOW "%sNode Type:" ANSI_COLOR_RESET, str);
+	switch (node->typeSpecifier)
+	{
+	case VAR:
+		std::cout << "Variable" << std::endl;
+		break;
+	case ARR:
+		std::cout << "Array" << std::endl;
+		break;
+	case FUN:
+		std::cout << "Function" << std::endl;
+		break;
+	case ARG:
+		std::cout << "Arguments" << std::endl;
+		break;
+	case PAR:
+		std::cout << "Parameter List" << std::endl;
+		break;
+	case CST:
+		std::cout << "Compaound statement" << std::endl;
+		break;
+	case DEC:
+		std::cout << "Declaration" << std::endl;
+		break;
+	case COM:
+		std::cout << "Compare" << std::endl;
+		break;
+	case STM:
+		std::cout << "Statement List" << std::endl;
+		break;
+	case CLL:
+		std::cout << "Call" << std::endl;
+		break;
+	case EMP:
+		std::cout << "Empty" << std::endl;
+		break;
+	default:
+		std::cout << "Unknown" << std::endl;
+		break;
+	}
+	printf(ANSI_COLOR_YELLOW "%sLine Number:" ANSI_COLOR_RESET, str);
+	std::cout << node->lineNumber << std::endl;
+	printf(ANSI_COLOR_YELLOW "%sName:" ANSI_COLOR_RESET, str);
+	std::cout << node->sValue << std::endl;
+	printf(ANSI_COLOR_YELLOW "%sValue:" ANSI_COLOR_RESET, str);
+	std::cout << node->nValue << std::endl;
+	printf(ANSI_COLOR_YELLOW "%sData Type:" ANSI_COLOR_RESET, str);
+	switch (node->typeSpecifier)
+	{
+	case NUM:
+	case INT:
+		std::cout << "Int" << std::endl;
+		break;
+	case VOID:
+		std::cout << "Void" << std::endl;
+		break;
+	default:
+		std::cout << "Unknown" << std::endl;
+		break;
+	}
+	printf(ANSI_COLOR_YELLOW "Rename:" ANSI_COLOR_RESET);
+	std::cout << node->rename << std::endl;
 }
 Parser::~Parser()
 {
