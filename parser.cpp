@@ -826,7 +826,7 @@ struct TreeNode * Parser::factor()
 	// (expression) || var || call || NUM
 	currentToken = nextToken();
 	if (DEBUG)
-		std::cout << "-> Factor assessing Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		std::cout << "-> Factor assessing Token: " << currentToken.line << ": " << currentToken.str << ", " << currentToken.type << "." << std::endl;
 	if (currentToken.str[0] == '(')
 	{
 		struct TreeNode * node = new struct TreeNode;
