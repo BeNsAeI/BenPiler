@@ -838,7 +838,7 @@ struct TreeNode * Parser::factor()
 			std::cout << "-> factor returned as (expression) Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
-	if (currentToken.type == VAR)
+	else if (currentToken.type == VAR)
 	{
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
@@ -853,7 +853,7 @@ struct TreeNode * Parser::factor()
 	tokenIndex--;
 	tokenIndex--;
 	currentToken = nextToken();
-	if (currentToken.type == DIGIT)
+	else if (currentToken.type == DIGIT)
 	{
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
