@@ -847,6 +847,28 @@ struct TreeNode * Parser::factor()
 		node->c1 = NULL;
 		node->c2 = NULL;
 		node->c3 = NULL;
+		if (currentToken.type == VAR)
+		{
+			currentToken = nextToken();
+			if (currentToken.str[0] == '(')
+			{
+				struct TreeNode * node = new struct TreeNode;
+				Trash.push_back(node);
+				node->c1 = NULL;
+				node->c2 = NULL;
+				node->c3 = NULL;
+				node->sibling = call();
+				if (DEBUG)
+					std::cout << "-> factor returned as Call at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+				return node;
+			}
+			else
+			{
+				tokenIndex--;
+				tokenIndex--;
+				currentToken = nextToken();
+			}
+		}
 		if (currentToken.str[0] == '[')
 		{
 			tokenIndex--;
@@ -879,18 +901,6 @@ struct TreeNode * Parser::factor()
 		if (DEBUG)
 			std::cout << "-> factor returned as num at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		
-		return node;
-	}
-	else
-	{
-		struct TreeNode * node = new struct TreeNode;
-		Trash.push_back(node);
-		node->c1 = NULL;
-		node->c2 = NULL;
-		node->c3 = NULL;
-		node->sibling = call();
-		if (DEBUG)
-			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
 }
