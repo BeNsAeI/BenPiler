@@ -1079,7 +1079,7 @@ void Parser::Print(struct TreeNode * node, std::string title, int depth)
 }
 void Parser::PrintSearchTree()
 {
-	printf(ANSI_COLOR_MAGENTA "Printing:\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_GREEN "Printing:\n" ANSI_COLOR_RESET);
 }
 Parser::~Parser()
 {
