@@ -15,7 +15,7 @@ Parser::Parser(std::vector<struct Token> tokens,bool debug)
 	Tokens = tokens;
 	tokenIndex = Tokens.begin();
 	unique = 0;
-	std::cout << "Parsing..." << std::endl;
+	std::cout << std::endl << "Parsing..." << std::endl;
 	program();
 }
 struct Token Parser::nextToken()
@@ -31,7 +31,9 @@ struct Token Parser::nextToken()
 }
 struct TreeNode * Parser::program()
 {
-      	struct TreeNode * node = new struct TreeNode;
+	if (DEBUG)
+		std::cout << "-> Program called at Token" << currentToken.line << ": " << currentToken.str << "." << std::endl;
+    struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->lineNumber = 0;
 	node->nValue = -1;
