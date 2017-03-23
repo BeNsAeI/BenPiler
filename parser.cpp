@@ -31,29 +31,6 @@ struct Token Parser::nextToken()
 	NON.str = "NON";
 	return NON;
 }
-void Parser::match(int expectedType)
-{
-	if(currentType == expectedType)
-	{
-		currentToken = currentToken = nextToken();
-		std::cout << currentToken.str<<std::endl;
-		currentType = currentToken.type;
-		currentLine = currentToken.line;
-	}else{
-		printf(ANSI_COLOR_RED "Fatal error: " ANSI_COLOR_RESET);
-		std::cout << "Unexpected token at line ";
-		printf(ANSI_COLOR_CYAN "%d\n" ANSI_COLOR_RESET,currentToken.line);
-		exit(1);
-	}
-}
-struct TreeNode * Parser::read_statement()
-{
-	struct TreeNode * myTree = new struct TreeNode;
-	myTree->lineNumber = currentLine;
-	match(READ);
-	//myTree->c1 = variable();
-	return myTree;
-}
 struct TreeNode * Parser::program()
 {
       	struct TreeNode * node = new struct TreeNode;
