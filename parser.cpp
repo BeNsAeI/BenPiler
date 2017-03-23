@@ -38,8 +38,8 @@ struct TreeNode * Parser::program()
 	node->lineNumber = 0;
 	node->nValue = -1;
 	node->sValue = "Program";
-	node->nodeType = -1;
-	node->typeSpecifier = -1;
+	node->nodeType = UNKNOWN;
+	node->typeSpecifier = UNKNOWN;
 	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
@@ -74,8 +74,8 @@ struct TreeNode * Parser::declaration()
 	node->lineNumber = currentToken.line;
 	node->nValue = -1;
 	node->sValue = "Declaration";
-	node->nodeType = -1;
-	node->typeSpecifier = -1;
+	node->nodeType = DEC;
+	node->typeSpecifier = DEC;
 	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
@@ -156,8 +156,8 @@ struct TreeNode * Parser::param_list()
 	node->lineNumber = currentToken.line;
 	node->nValue = -1;
 	node->sValue = "Parameter List";
-	node->nodeType = -1;
-	node->typeSpecifier = -1;
+	node->nodeType = PAR;
+	node->typeSpecifier = PAR;
 	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
@@ -254,8 +254,8 @@ struct TreeNode * Parser::compound_stmt()
 	node->lineNumber = currentToken.line;
 	node->nValue = -1;
 	node->sValue = "Compound Statement";
-	node->nodeType = -1;
-	node->typeSpecifier = -1;
+	node->nodeType = CST;
+	node->typeSpecifier = CST;
 	node->rename = "NULL";
 	
 	if (DEBUG)
@@ -581,9 +581,8 @@ struct TreeNode * Parser::var()
 	node->lineNumber = currentToken.line;
 	node->nValue = 0;
 	node->sValue = "Variable";
-	node->nodeType = -1;
 	node->typeSpecifier = -1;
-	node->rename = "tmpVar"+ std::to_string(unique);
+	node->rename = "tmpVar"+ std::to_string(unique++);
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
@@ -858,6 +857,12 @@ struct TreeNode * Parser::factor()
 	{
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
+		node->lineNumber = currentToken.line;
+		node->nValue = currentToken.value;
+		node->sValue = "Number";
+		node->nodeType = NUM;
+		node->typeSpecifier = INT;
+		node->rename = "tmpVar" + std::to_string(unique++);;
 		node->c1 = NULL;
 		node->c2 = NULL;
 		node->c3 = NULL;
@@ -870,16 +875,14 @@ struct TreeNode * Parser::factor()
 	}
 	else
 	{
-		currentToken = nextToken();
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		node->c1 = NULL;
 		node->c2 = NULL;
 		node->c3 = NULL;
 		node->sibling = call();
-		currentToken = nextToken();
 		if (DEBUG)
-			std::cout << "-> factor returned as num at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
 }
@@ -887,6 +890,12 @@ struct TreeNode * Parser::call()
 {
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	node->lineNumber = currentToken.line;
+	node->nValue = -1;
+	node->sValue = "Call";
+	node->nodeType = -1;
+	node->typeSpecifier = -1; // SELECT THIS int VS void ?
+	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
@@ -897,6 +906,12 @@ struct TreeNode * Parser::args()
 {
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	node->lineNumber = currentToken.line;
+	node->nValue = -1;
+	node->sValue = "Argument";
+	node->nodeType = ARG;
+	node->typeSpecifier = ARG;
+	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
