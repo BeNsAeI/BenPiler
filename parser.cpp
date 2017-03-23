@@ -1084,7 +1084,7 @@ void Parser::PrintSearchTree()
 	for (std::vector<struct TreeNode *>::iterator it = Trash.begin(); it != Trash.end(); ++it)
 	{
 		O = *it;
-		Print(O, "", 0);
+		Print(O, "Test", 0);
 	}
 }
 Parser::~Parser()
