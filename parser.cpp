@@ -773,7 +773,6 @@ struct TreeNode * Parser::additiveExpression()
 		node->rename = "NULL";
 		if (DEBUG)
 			std::cout << "-> Additive expression is returning at (; case): " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		Print(node, "C1", 0);
 		indent--;
 		return node;
 	}
@@ -794,7 +793,6 @@ struct TreeNode * Parser::additiveExpression()
 		node->sibling = NULL;
 		if (DEBUG)
 			std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		Print(node, "C1",indent);
 		indent--;
 		return node;
 	}
