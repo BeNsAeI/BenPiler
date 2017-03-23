@@ -6,7 +6,6 @@
 
 #include "scanner.h"
 #include "parser.h"
-#include "checker.h"
 #include "color.h"
 #include "token.h"
 
