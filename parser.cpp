@@ -609,8 +609,8 @@ struct TreeNode * Parser::var()
 	struct Token next = currentToken = nextToken();
 	struct Token arr_val;
 	struct Token closure;
-	if (DEBUG)
-		std::cout << std::endl << id.str << " HERE " << next.str << " ";
+	if (DEBUG && false)
+		std::cout << std::endl << id.str << " " << next.str << " ";
 	switch (next.str[0])
 	{
 	case ';':
