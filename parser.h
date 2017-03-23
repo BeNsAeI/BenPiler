@@ -57,6 +57,7 @@ private:
 	std::vector<struct Token>::iterator tokenIndex;
 	struct Token currentToken;
 	int currentType,currentLine;
+	int indent;
 	void Print(struct TreeNode * node, std::string title);
 	struct TreeNode * additiveExpression();
 	struct TreeNode * program();

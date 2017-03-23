@@ -1002,8 +1002,8 @@ void Parser::Print(struct TreeNode * node, std::string title)
 	{
 		str = str + '\t';
 	}
-	printf(ANSI_COLOR_CYAN "%s%s\n" ANSI_COLOR_RESET, str, title);
-	printf(ANSI_COLOR_YELLOW "%sNode Type:" ANSI_COLOR_RESET, str);
+	printf(ANSI_COLOR_CYAN "%s%s\n" ANSI_COLOR_RESET, str.c_str(), title);
+	printf(ANSI_COLOR_YELLOW "%sNode Type:" ANSI_COLOR_RESET, str.c_str());
 	switch (node->typeSpecifier)
 	{
 	case VAR:
@@ -1043,13 +1043,13 @@ void Parser::Print(struct TreeNode * node, std::string title)
 		std::cout << "Unknown" << std::endl;
 		break;
 	}
-	printf(ANSI_COLOR_YELLOW "%sLine Number:" ANSI_COLOR_RESET, str);
+	printf(ANSI_COLOR_YELLOW "%sLine Number:" ANSI_COLOR_RESET, str.c_str());
 	std::cout << node->lineNumber << std::endl;
-	printf(ANSI_COLOR_YELLOW "%sName:" ANSI_COLOR_RESET, str);
+	printf(ANSI_COLOR_YELLOW "%sName:" ANSI_COLOR_RESET, str.c_str());
 	std::cout << node->sValue << std::endl;
-	printf(ANSI_COLOR_YELLOW "%sValue:" ANSI_COLOR_RESET, str);
+	printf(ANSI_COLOR_YELLOW "%sValue:" ANSI_COLOR_RESET, str.c_str());
 	std::cout << node->nValue << std::endl;
-	printf(ANSI_COLOR_YELLOW "%sData Type:" ANSI_COLOR_RESET, str);
+	printf(ANSI_COLOR_YELLOW "%sData Type:" ANSI_COLOR_RESET, str.c_str());
 	switch (node->typeSpecifier)
 	{
 	case NUM:
