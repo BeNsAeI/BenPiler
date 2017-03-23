@@ -606,6 +606,7 @@ struct TreeNode * Parser::var()
 	case '>':
 	case '!':
 	case ')':
+	case '(':
 	case '}':
 	case 'N':
 	case '=':
