@@ -680,7 +680,7 @@ struct TreeNode * Parser::additiveExpression()
 {
 	if (DEBUG)
 		std::cout << "-> Additive expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	if (currentToken.str[0] == ';' || currentToken.str[0] == ','|| currentToken.str[0] == ')'|| currentToken.str[0] == ')' || currentToken.type == SYMBOLCURL ||  currentToken.type == NONTOKEN)
+	if (currentToken.str[0] == ';' || currentToken.str[0] == ')'|| currentToken.str[0] == ')' || currentToken.type == SYMBOLCURL ||  currentToken.type == NONTOKEN)
 	{
 		tokenIndex--;
 		tokenIndex--;
@@ -710,7 +710,7 @@ struct TreeNode * Parser::additiveExpression()
 		std::cout << "-> second token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
-	if (currentToken.str[0] == ';' || currentToken.str[0] == ')')
+	if (currentToken.str[0] == ';' || currentToken.str[0] == ')' || currentToken.str[0] == ',')
 	{
 		tokenIndex--;
 		tokenIndex--;
