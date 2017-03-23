@@ -662,7 +662,8 @@ struct TreeNode * Parser::var()
 		exit(-1);
 		break;
 	}
-	std::cout << std::endl;
+	
+	std::cout << "here:" << std::endl;
 	if (DEBUG)
 		std::cout << "-> Var returned with Token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	return node;
