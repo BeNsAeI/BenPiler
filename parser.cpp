@@ -50,7 +50,7 @@ struct TreeNode * Parser::program()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = declaration_list();
-	void Print(node,"");
+	Print(node,"");
 	indent++;
 	return node;
 }
