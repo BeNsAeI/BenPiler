@@ -50,7 +50,7 @@ struct TreeNode * Parser::program()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = declaration_list();
-	Print(node,"",0);
+	Print(node,"",indent);
 	return node;
 }
 struct TreeNode * Parser::declaration_list()
@@ -166,7 +166,7 @@ struct TreeNode * Parser::declaration()
 			break;
 	}
 	node->sibling = declaration_list();
-	Print(node, "Sibling",0);
+	Print(node, "Sibling",indent);
 	
 	return node;
 }
@@ -194,7 +194,7 @@ struct TreeNode * Parser::param_list()
 		tmp = tmp->sibling;
 		tmp2 = param();
 	}
-	Print(node, "C1",0);
+	Print(node, "C1",indent);
 	
 	return node;
 }//c1
@@ -276,7 +276,7 @@ struct TreeNode * Parser::param()
 			exit(-1);
 			break;
 	}
-	Print(node, "Sibling",0);
+	Print(node, "Sibling",indent);
 	
 	return node;
 }
@@ -321,7 +321,7 @@ struct TreeNode * Parser::compound_stmt()
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \"}\" is missing." << std::endl;
 		exit(-1);
 	}
-	Print(node, "C2",0);
+	Print(node, "C2",indent);
 	return node;
 }
 struct TreeNode * Parser::local_declaration()
@@ -405,7 +405,7 @@ struct TreeNode * Parser::local_declaration()
 			exit(-1);
 			break;
 	}
-	Print(node, "Sibling",0);
+	Print(node, "Sibling",indent);
 	
 	return node;
 }
@@ -431,7 +431,7 @@ struct TreeNode * Parser::statement_list()
 		tmp = tmp->sibling;
 		tmp2 = statement();
 	}
-	Print(node, "Sibling",0);
+	Print(node, "Sibling",indent);
 	
 	return node;
 }
@@ -691,7 +691,7 @@ struct TreeNode * Parser::var()
 	}
 	if (DEBUG)
 		std::cout << "-> Var returned with Token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	Print(node, "C1",0);
+	Print(node, "C1",indent);
 	
 	return node;
 }
@@ -778,7 +778,7 @@ struct TreeNode * Parser::additiveExpression()
 		node->sibling = NULL;
 		if (DEBUG)
 			std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		Print(node, "C1",0);
+		Print(node, "C1",indent);
 		
 		return node;
 	}
@@ -950,7 +950,7 @@ struct TreeNode * Parser::factor()
 				node->sibling = call();
 				if (DEBUG)
 					std::cout << "-> factor returned as Call at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-				Print(node, "C1",0);
+				Print(node, "C1",indent);
 				return node;
 			}
 			else
@@ -969,7 +969,7 @@ struct TreeNode * Parser::factor()
 		node->sibling = var();
 		if (DEBUG)
 			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		Print(node, "C1",0);
+		Print(node, "C1",indent);
 		return node;
 	}
 	tokenIndex--;
@@ -992,7 +992,7 @@ struct TreeNode * Parser::factor()
 		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> factor returned as num at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-		Print(node, "C1",0);
+		Print(node, "C1",indent);
 
 		return node;
 	}
@@ -1022,7 +1022,7 @@ struct TreeNode * Parser::call()
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \")\" is missing." << std::endl;
 		exit(-1);
 	}
-	Print(node, "Sibling",0);
+	Print(node, "Sibling",indent);
 	return node;
 }
 struct TreeNode * Parser::args()
@@ -1048,7 +1048,7 @@ struct TreeNode * Parser::args()
 	node->sibling = NULL;
 	if (DEBUG)
 		std::cout << "-> Argument is returning at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-	Print(node, "Sibling",0);
+	Print(node, "Sibling",indent);
 	return node;
 }
 struct TreeNode * Parser::arg_list()
