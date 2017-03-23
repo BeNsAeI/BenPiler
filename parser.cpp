@@ -57,7 +57,7 @@ struct TreeNode * Parser::declaration_list()
 {
 	if (DEBUG)
 		std::cout << "-> Declaration List called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-
+	indent++;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
@@ -71,10 +71,12 @@ struct TreeNode * Parser::declaration_list()
 		tmp = tmp->sibling;
 		tmp2 = declaration();
 	}
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::declaration()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> Declaration called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 
@@ -167,11 +169,12 @@ struct TreeNode * Parser::declaration()
 	}
 	node->sibling = declaration_list();
 	Print(node, "Sibling",indent);
-	
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::param_list()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> Parameter List called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
@@ -195,11 +198,12 @@ struct TreeNode * Parser::param_list()
 		tmp2 = param();
 	}
 	Print(node, "C1",indent);
-	
+	indent--;
 	return node;
 }//c1
 struct TreeNode * Parser::param()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> Paramter called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 
@@ -277,11 +281,12 @@ struct TreeNode * Parser::param()
 			break;
 	}
 	Print(node, "Sibling",indent);
-	
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::compound_stmt()
 {
+	indent++;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	currentToken = nextToken();
@@ -322,10 +327,12 @@ struct TreeNode * Parser::compound_stmt()
 		exit(-1);
 	}
 	Print(node, "C2",indent);
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::local_declaration()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> local_declaration received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct Token typeSpec = currentToken = nextToken();
@@ -345,6 +352,7 @@ struct TreeNode * Parser::local_declaration()
 	if(typeSpec.type != KEYWORDS)
 	{
 		tokenIndex--;
+		indent--;
 		return NULL;
 	}
 	node->lineNumber = typeSpec.line;
@@ -353,7 +361,10 @@ struct TreeNode * Parser::local_declaration()
 	else if (typeSpec.str == "int")
 		node->typeSpecifier = INT;
 	else
+	{
+		indent--;
 		return NULL;
+	}
 	struct Token id = currentToken = nextToken();
 	node->sValue = id.str;
 	struct Token next = currentToken = nextToken();
@@ -406,7 +417,7 @@ struct TreeNode * Parser::local_declaration()
 			break;
 	}
 	Print(node, "Sibling",indent);
-	
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::statement_list()
