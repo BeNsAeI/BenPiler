@@ -902,6 +902,7 @@ struct TreeNode * Parser::call()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
+	exit(0);
 	return node;
 }
 struct TreeNode * Parser::args()
