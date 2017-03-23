@@ -888,6 +888,8 @@ struct TreeNode * Parser::factor()
 }
 struct TreeNode * Parser::call()
 {
+	if (DEBUG)
+		std::cout << "-> Call is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->lineNumber = currentToken.line;
