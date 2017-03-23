@@ -7,15 +7,16 @@
 
 #define VOID 1
 #define INT 2
-#define VAR 1 // Variable
-#define ARR 2 // Array
-#define FUN 3 // Function
-#define ARG 4 // Arguments
-#define PAR 5 // Parameter List
-#define CST 6 // Compaound statement
-#define DEC 7 // Declaration
-#define COM 8 // Compare
-#define EMP 9 // Empty
+#define NUM 3
+#define VAR 4 // Variable
+#define ARR 5 // Array
+#define FUN 6 // Function
+#define ARG 7 // Arguments
+#define PAR 8 // Parameter List
+#define CST 9 // Compaound statement
+#define DEC 10 // Declaration
+#define COM 11 // Compare
+#define EMP 12 // Empty
 #define UNKNOWN -1
 
 struct TreeNode;
