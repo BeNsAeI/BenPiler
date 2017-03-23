@@ -1002,7 +1002,7 @@ void Parser::Print(struct TreeNode * node, std::string title)
 	{
 		str = str + '\t';
 	}
-	printf(ANSI_COLOR_CYAN "%s%s\n" ANSI_COLOR_RESET, str.c_str(), title);
+	printf(ANSI_COLOR_CYAN "%s%s\n" ANSI_COLOR_RESET, str.c_str(), title.c_str());
 	printf(ANSI_COLOR_YELLOW "%sNode Type:" ANSI_COLOR_RESET, str.c_str());
 	switch (node->typeSpecifier)
 	{
