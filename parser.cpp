@@ -32,7 +32,7 @@ struct Token Parser::nextToken()
 struct TreeNode * Parser::program()
 {
 	if (DEBUG)
-		std::cout << "-> Program called at Token" << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		std::cout << "-> Program called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
     struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->lineNumber = 0;
@@ -49,6 +49,9 @@ struct TreeNode * Parser::program()
 }
 struct TreeNode * Parser::declaration_list()
 {
+	if (DEBUG)
+		std::cout << "-> Declaration List called with Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
