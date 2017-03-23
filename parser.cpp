@@ -840,7 +840,7 @@ struct TreeNode * Parser::factor()
 			std::cout << "-> factor returned as (expression) Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
-	else if (currentToken.type == VAR)
+	else if (currentToken.type == VAR|| currentToken.str[0] == '[')
 	{
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
