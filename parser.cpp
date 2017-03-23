@@ -68,13 +68,20 @@ struct TreeNode * Parser::declaration()
 {
 	if(currentToken.type == NONTOKEN)
 	return NULL;
+	struct Token typeSpec = currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	node->lineNumber = currentToken.line;
+	node->nValue = -1;
+	node->sValue = "Declaration";
+	node->nodeType = -1;
+	node->typeSpecifier = -1;
+	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	struct Token typeSpec = currentToken = nextToken();
+	
 	node->lineNumber = typeSpec.line;
 	if (typeSpec.str == "void")
 		node->typeSpecifier = VOID;
@@ -146,6 +153,12 @@ struct TreeNode * Parser::param_list()
 {
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	node->lineNumber = currentToken.line;
+	node->nValue = -1;
+	node->sValue = "Parameter List";
+	node->nodeType = -1;
+	node->typeSpecifier = -1;
+	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
@@ -162,6 +175,7 @@ struct TreeNode * Parser::param_list()
 }
 struct TreeNode * Parser::param()
 {
+	struct Token typeSpec = currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
@@ -172,7 +186,7 @@ struct TreeNode * Parser::param()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	struct Token typeSpec = currentToken = nextToken();
+	
 	node->lineNumber = typeSpec.line;
 	if(typeSpec.str == "void")
 		node->typeSpecifier = VOID;
@@ -237,6 +251,13 @@ struct TreeNode * Parser::compound_stmt()
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	currentToken = nextToken();
+	node->lineNumber = currentToken.line;
+	node->nValue = -1;
+	node->sValue = "Compound Statement";
+	node->nodeType = -1;
+	node->typeSpecifier = -1;
+	node->rename = "NULL";
+	
 	if (DEBUG)
 		std::cout << "-> Compound Statment received Token at line " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if(currentToken.str[0] != '{')
