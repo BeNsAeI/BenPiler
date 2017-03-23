@@ -331,10 +331,10 @@ struct TreeNode * Parser::local_declaration()
 	struct Token typeSpec = currentToken = nextToken();
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
-	node->nodeType = EMP;
+	node->nodeType = DEC;
 	node->lineNumber = currentToken.line;
 	node->nValue = 0;
-	node->sValue = "NULL";
+	node->sValue = "Local Declearation";
 	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
@@ -754,7 +754,7 @@ struct TreeNode * Parser::additiveExpression()
 		node->nodeType = EMP;
 		node->lineNumber = currentToken.line;
 		node->nValue = 0;
-		node->sValue = "NULL";
+		node->sValue = "Additive Expression";
 		node->rename = "NULL";
 		if (DEBUG)
 			std::cout << "-> Additive expression is returning at (; case): " << currentToken.line << ": " << currentToken.str << "." << std::endl;
@@ -763,6 +763,11 @@ struct TreeNode * Parser::additiveExpression()
 	}
 	else
 	{
+		node->nodeType = EMP;
+		node->lineNumber = currentToken.line;
+		node->nValue = 0;
+		node->sValue = "Additive Expression";
+		node->rename = "NULL";
 		tokenIndex--;
 		tokenIndex--;
 		tokenIndex--;
@@ -793,14 +798,13 @@ struct TreeNode * Parser::relop()
 	node->nodeType = EMP;
 	node->lineNumber = currentToken.line;
 	node->nValue = 0;
-	node->sValue = "NULL";
+	node->sValue = "Relop";
 	node->rename = "NULL";
 	Trash.push_back(node);
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	Print(node, "C2",0);
 	return node;
 }
 struct TreeNode * Parser::addop()
@@ -820,13 +824,12 @@ struct TreeNode * Parser::addop()
 	node->nodeType = EMP;
 	node->lineNumber = currentToken.line;
 	node->nValue = 0;
-	node->sValue = "NULL";
+	node->sValue = "Addop";
 	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	Print(node, "C2",0);
 	return node;
 }
 struct TreeNode * Parser::term()
@@ -864,13 +867,12 @@ struct TreeNode * Parser::mulop()
 	node->nodeType = EMP;
 	node->lineNumber = currentToken.line;
 	node->nValue = 0;
-	node->sValue = "NULL";
+	node->sValue = "Mul op";
 	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
-	Print(node, "C2",0);
 	return node;
 }
 struct TreeNode * Parser::factor()
@@ -904,6 +906,11 @@ struct TreeNode * Parser::factor()
 	{
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
+		node->nodeType = EMP;
+		node->lineNumber = currentToken.line;
+		node->nValue = 0;
+		node->sValue = "(Expression)";
+		node->rename = "NULL";
 		node->c1 = NULL;
 		node->c2 = NULL;
 		node->c3 = NULL;
@@ -917,10 +924,10 @@ struct TreeNode * Parser::factor()
 	{
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
-		node->nodeType = EMP;
+		node->nodeType = VAR;
 		node->lineNumber = currentToken.line;
 		node->nValue = 0;
-		node->sValue = "NULL";
+		node->sValue = "VAR";
 		node->rename = "NULL";
 		node->c1 = NULL;
 		node->c2 = NULL;
@@ -932,10 +939,10 @@ struct TreeNode * Parser::factor()
 			{
 				struct TreeNode * node = new struct TreeNode;
 				Trash.push_back(node);
-				node->nodeType = EMP;
+				node->nodeType = CLL;
 				node->lineNumber = currentToken.line;
 				node->nValue = 0;
-				node->sValue = "NULL";
+				node->sValue = "Call";
 				node->rename = "NULL";
 				node->c1 = NULL;
 				node->c2 = NULL;
