@@ -994,6 +994,10 @@ struct TreeNode * Parser::arg_list()
 	}
 	return node;
 }
+void Parser::Parse()
+{
+	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
+}
 Parser::~Parser()
 {
 	std::cout << "Destructor called." << std::endl;

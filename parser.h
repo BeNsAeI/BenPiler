@@ -45,6 +45,7 @@ class Parser
 public:
 	Parser(std::vector<struct Token> tokens,bool debug);
 	struct TreeNode * Parse();
+	void Print();
 	~Parser();
 private:
 	bool DEBUG;
