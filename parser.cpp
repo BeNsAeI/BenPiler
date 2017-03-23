@@ -597,6 +597,7 @@ struct TreeNode * Parser::var()
 	switch (next.str[0])
 	{
 	case ';':
+	case ',':
 	case '+':
 	case '-':
 	case '*':
@@ -910,14 +911,17 @@ struct TreeNode * Parser::call()
 		std::cout << "-> Call is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
+	tokenIndex--;
+	tokenIndex--;
+	currentToken = nextToken();
 	node->lineNumber = currentToken.line;
 	node->nValue = -1;
 	node->sValue = "Call";
 	node->nodeType = CLL;
 	node->typeSpecifier = -1; // SELECT THIS int VS void ?
 	node->rename = "NULL";
-	node->c1 = NULL;
-	node->c2 = NULL;
+	node->c1 = var();
+	node->c2 = arg_list();
 	node->c3 = NULL;
 	node->sibling = NULL;
 	exit(0);
