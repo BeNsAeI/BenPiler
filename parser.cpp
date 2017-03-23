@@ -977,7 +977,7 @@ struct TreeNode * Parser::arg_list()
 	node->c3 = NULL;
 	node->sibling = NULL;
 	struct TreeNode * tmp = node;
-	struct TreeNode * tmp2 = arg_list();
+	struct TreeNode * tmp2 = args();
 	while (tmp2 != NULL)
 	{
 		tmp->sibling = tmp2;
