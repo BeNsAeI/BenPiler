@@ -42,6 +42,7 @@ int main (int argc, char ** argv)
 	Parser * myParser = new Parser(myScanner->Tokens,DEBUG);
 	cout << "Running checker ..." << endl;
 	struct TreeNode * AST = myParser->Parse();
+	myParser->PrintSearchTree();
 	cout << "cleaning out..." << endl;
 	delete (myParser);
 	delete (myScanner);

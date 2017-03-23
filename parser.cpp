@@ -1077,6 +1077,10 @@ void Parser::Print(struct TreeNode * node, std::string title, int depth)
 	printf(ANSI_COLOR_YELLOW "%sRename:" ANSI_COLOR_RESET, str.c_str());
 	std::cout << node->rename << std::endl;
 }
+void Parser::PrintSearchTree()
+{
+	printf(ANSI_COLOR_MAGENTA "Printing:\n" ANSI_COLOR_RESET);
+}
 Parser::~Parser()
 {
 	std::cout << "Destructor called." << std::endl;
