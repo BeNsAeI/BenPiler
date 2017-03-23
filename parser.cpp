@@ -1005,7 +1005,7 @@ void Parser::Print(struct TreeNode * node, std::string title)
 	std::string str = "";
 	for (int i = 0; i < indent; i++)
 	{
-		str = str + '\t';
+		str = str + "   ";
 	}
 	printf(ANSI_COLOR_CYAN "%s%s\n" ANSI_COLOR_RESET, str.c_str(), title.c_str());
 	printf(ANSI_COLOR_YELLOW "%sNode Type:" ANSI_COLOR_RESET, str.c_str());
@@ -1068,7 +1068,7 @@ void Parser::Print(struct TreeNode * node, std::string title)
 		std::cout << "Unknown" << std::endl;
 		break;
 	}
-	printf(ANSI_COLOR_YELLOW "Rename:" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_YELLOW "%sRename:" ANSI_COLOR_RESET, str.c_str());
 	std::cout << node->rename << std::endl;
 }
 Parser::~Parser()
