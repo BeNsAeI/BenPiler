@@ -850,11 +850,11 @@ struct TreeNode * Parser::factor()
 			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		return node;
 	}
-	tokenIndex--;
-	tokenIndex--;
-	currentToken = nextToken();
 	else if (currentToken.type == DIGIT)
 	{
+		tokenIndex--;
+		tokenIndex--;
+		currentToken = nextToken();
 		struct TreeNode * node = new struct TreeNode;
 		Trash.push_back(node);
 		node->lineNumber = currentToken.line;
