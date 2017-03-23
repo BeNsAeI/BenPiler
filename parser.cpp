@@ -930,6 +930,9 @@ struct TreeNode * Parser::call()
 }
 struct TreeNode * Parser::args()
 {
+	if (DEBUG)
+		std::cout << "-> Argument is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->lineNumber = currentToken.line;
@@ -946,12 +949,15 @@ struct TreeNode * Parser::args()
 }
 struct TreeNode * Parser::arg_list()
 {
+	if (DEBUG)
+		std::cout << "-> Argument list is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;
-	node->sibling = NULL;
+	node->sibling = args();
+
 	return node;
 }
 Parser::~Parser()
