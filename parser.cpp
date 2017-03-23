@@ -191,6 +191,8 @@ struct TreeNode * Parser::param_list()
 		tmp = tmp->sibling;
 		tmp2 = param();
 	}
+	Print(node, "C1");
+	indent++;
 	return node;
 }//c1
 struct TreeNode * Parser::param()
@@ -310,8 +312,10 @@ struct TreeNode * Parser::compound_stmt()
 		std::cout << "\"" << currentToken.str << "\"" << " Unexpected token. \"}\" is missing." << std::endl;
 		exit(-1);
 	}
+	Print(node, "C2");
+	indent++;
 	return node;
-}//c2
+}
 struct TreeNode * Parser::local_declaration()
 {
 	if (DEBUG)
@@ -388,6 +392,8 @@ struct TreeNode * Parser::local_declaration()
 			exit(-1);
 			break;
 	}
+	Print(node, "Sibling");
+	indent++;
 	return node;
 }
 struct TreeNode * Parser::statement_list()
