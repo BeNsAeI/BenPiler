@@ -16,7 +16,9 @@
 #define CST 9 // Compaound statement
 #define DEC 10 // Declaration
 #define COM 11 // Compare
-#define EMP 12 // Empty
+#define STM 12 // Statement List
+#define CLL 13 // Call
+#define EMP 14 // Empty
 #define UNKNOWN -1
 
 struct TreeNode;

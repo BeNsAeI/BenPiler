@@ -374,8 +374,8 @@ struct TreeNode * Parser::statement_list()
 	node->lineNumber = currentToken.line;
 	node->nValue = -1;
 	node->sValue = "Statement List";
-	node->nodeType = -1;
-	node->typeSpecifier = -1;
+	node->nodeType = STM;
+	node->typeSpecifier = STM;
 	node->rename = "NULL";
 	node->c1 = NULL;
 	node->c2 = NULL;
@@ -893,7 +893,7 @@ struct TreeNode * Parser::call()
 	node->lineNumber = currentToken.line;
 	node->nValue = -1;
 	node->sValue = "Call";
-	node->nodeType = -1;
+	node->nodeType = CLL;
 	node->typeSpecifier = -1; // SELECT THIS int VS void ?
 	node->rename = "NULL";
 	node->c1 = NULL;
