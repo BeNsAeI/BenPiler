@@ -8,17 +8,17 @@
 #define VOID 1
 #define INT 2
 #define NUM 3
-#define VAR 4 // Variable
-#define ARR 5 // Array
-#define FUN 6 // Function
-#define ARG 7 // Arguments
-#define PAR 8 // Parameter List
-#define CST 9 // Compaound statement
-#define DEC 10 // Declaration
-#define COM 11 // Compare
-#define STM 12 // Statement List
-#define CLL 13 // Call
-#define EMP 14 // Empty
+#define VAR 1 // Variable
+#define ARR 2 // Array
+#define FUN 3 // Function
+#define ARG 4 // Arguments
+#define PAR 5 // Parameter List
+#define CST 6 // Compaound statement
+#define DEC 7 // Declaration
+#define COM 8 // Compare
+#define STM 9 // Statement List
+#define CLL 10 // Call
+#define EMP 11 // Empty
 #define UNKNOWN -1
 
 struct TreeNode;
