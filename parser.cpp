@@ -115,7 +115,7 @@ struct TreeNode * Parser::declaration()
 			node->nodeType = VAR;
 			node->rename = "tmp" + SSTR(unique++);
 			if(DEBUG)
-				std::cout <<std::endl;
+				std::cout << "HERE" <<std::endl;
 			break;
 		case '[':
 			node->nodeType = ARR;
@@ -609,7 +609,7 @@ struct TreeNode * Parser::var()
 	struct Token next = currentToken = nextToken();
 	struct Token arr_val;
 	struct Token closure;
-	if (DEBUG && false)
+	if (DEBUG)
 		std::cout << std::endl << id.str << " " << next.str << " ";
 	switch (next.str[0])
 	{
