@@ -45,7 +45,7 @@ class Parser
 public:
 	Parser(std::vector<struct Token> tokens,bool debug);
 	struct TreeNode * Parse();
-	void Print();
+	
 	~Parser();
 private:
 	bool DEBUG;
@@ -56,6 +56,7 @@ private:
 	std::vector<struct Token>::iterator tokenIndex;
 	struct Token currentToken;
 	int currentType,currentLine;
+	void Print(struct TreeNode * node);
 	struct TreeNode * additiveExpression();
 	struct TreeNode * program();
 	struct TreeNode * declaration_list();

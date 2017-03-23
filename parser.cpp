@@ -994,8 +994,12 @@ struct TreeNode * Parser::arg_list()
 	}
 	return node;
 }
-void Parser::Print()
+void Parser::Print(struct TreeNode * node)
 {
+	//printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
 	printf(ANSI_COLOR_CYAN "Printing the tree:\n" ANSI_COLOR_RESET);
 }
 Parser::~Parser()
