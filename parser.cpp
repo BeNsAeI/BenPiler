@@ -847,6 +847,12 @@ struct TreeNode * Parser::factor()
 		node->c1 = NULL;
 		node->c2 = NULL;
 		node->c3 = NULL;
+		if (currentToken.str[0] == '[')
+		{
+			tokenIndex--;
+			tokenIndex--;
+			currentToken = nextToken();
+		}
 		node->sibling = var();
 		if (DEBUG)
 			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
