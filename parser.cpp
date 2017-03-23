@@ -610,7 +610,7 @@ struct TreeNode * Parser::var()
 	struct Token arr_val;
 	struct Token closure;
 	if (DEBUG)
-		std::cout << std::endl << id.str << " " << next.str << " ";
+		std::cout << std::endl << id.str << " HERE " << next.str << " ";
 	switch (next.str[0])
 	{
 	case ';':
@@ -630,7 +630,7 @@ struct TreeNode * Parser::var()
 		node->nodeType = VAR;
 		node->rename = "tmp" + SSTR(unique++);
 		if (DEBUG)
-			std::cout << "HERE2" << std::endl;
+			std::cout << std::endl;
 		break;
 	case '[':
 		node->nodeType = ARR;
