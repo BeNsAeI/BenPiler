@@ -583,7 +583,7 @@ struct TreeNode * Parser::var()
 	node->sValue = "Variable";
 	node->nodeType = -1;
 	node->typeSpecifier = -1;
-	node->rename = "tmpVar"+ unique.str;
+	node->rename = "tmpVar"+ std::to_string(unique);
 	node->c1 = NULL;
 	node->c2 = NULL;
 	node->c3 = NULL;

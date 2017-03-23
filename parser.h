@@ -40,13 +40,11 @@ private:
 	bool DEBUG;
 	unsigned int unique;
 	std::vector<struct TreeNode *> Trash;
-	void match(int expectedType);
 	std::vector<struct Token> Tokens;
 	struct Token nextToken();
 	std::vector<struct Token>::iterator tokenIndex;
 	struct Token currentToken;
 	int currentType,currentLine;
-	struct TreeNode * read_statement();
 	struct TreeNode * additiveExpression();
 	struct TreeNode * program();
 	struct TreeNode * declaration_list();
