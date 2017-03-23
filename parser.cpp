@@ -422,6 +422,7 @@ struct TreeNode * Parser::local_declaration()
 }
 struct TreeNode * Parser::statement_list()
 {
+	indent++;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->lineNumber = currentToken.line;
@@ -443,7 +444,7 @@ struct TreeNode * Parser::statement_list()
 		tmp2 = statement();
 	}
 	Print(node, "Sibling",indent);
-	
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::statement()
@@ -629,6 +630,7 @@ struct TreeNode * Parser::expression()
 }
 struct TreeNode * Parser::var()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> Var is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
@@ -703,7 +705,7 @@ struct TreeNode * Parser::var()
 	if (DEBUG)
 		std::cout << "-> Var returned with Token at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	Print(node, "C1",indent);
-	
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::simple_expressive()
@@ -720,6 +722,7 @@ struct TreeNode * Parser::simple_expressive()
 }
 struct TreeNode * Parser::additiveExpression()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> Additive expression is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if (currentToken.str[0] == ';' || currentToken.str[0] == ')'|| currentToken.str[0] == ')' || currentToken.type == SYMBOLCURL ||  currentToken.type == NONTOKEN)
@@ -732,6 +735,7 @@ struct TreeNode * Parser::additiveExpression()
 			currentToken = nextToken();
 			if (DEBUG)
 				std::cout << "-> Additive expression is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			indent--;
 			return NULL;
 		}
 		else
@@ -770,6 +774,7 @@ struct TreeNode * Parser::additiveExpression()
 		if (DEBUG)
 			std::cout << "-> Additive expression is returning at (; case): " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		Print(node, "C1", 0);
+		indent--;
 		return node;
 	}
 	else
@@ -790,7 +795,7 @@ struct TreeNode * Parser::additiveExpression()
 		if (DEBUG)
 			std::cout << "-> Additive expression is returning at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		Print(node, "C1",indent);
-		
+		indent--;
 		return node;
 	}
 }
@@ -888,6 +893,7 @@ struct TreeNode * Parser::mulop()
 }
 struct TreeNode * Parser::factor()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> factor is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if (currentToken.str[0] == ';' || currentToken.str[0] == ')'|| currentToken.str[0] == ')' || currentToken.str[0] == '+' || currentToken.str[0] == '-' || currentToken.str[0] == ')' || currentToken.type == NONTOKEN)
@@ -900,6 +906,7 @@ struct TreeNode * Parser::factor()
 			currentToken = nextToken();
 			if (DEBUG)
 				std::cout << "-> factor is returning with NULL at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+			indent--;
 			return NULL;
 		}
 		else
@@ -929,6 +936,7 @@ struct TreeNode * Parser::factor()
 		currentToken = nextToken();
 		if (DEBUG)
 			std::cout << "-> factor returned as (expression) Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
+		indent--;
 		return node;
 	}
 	else if (currentToken.type == VAR|| currentToken.str[0] == '[')
@@ -962,6 +970,7 @@ struct TreeNode * Parser::factor()
 				if (DEBUG)
 					std::cout << "-> factor returned as Call at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 				Print(node, "C1",indent);
+				indent--;
 				return node;
 			}
 			else
@@ -981,6 +990,7 @@ struct TreeNode * Parser::factor()
 		if (DEBUG)
 			std::cout << "-> factor returned as var at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		Print(node, "C1",indent);
+		indent--;
 		return node;
 	}
 	tokenIndex--;
@@ -1004,12 +1014,13 @@ struct TreeNode * Parser::factor()
 		if (DEBUG)
 			std::cout << "-> factor returned as num at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 		Print(node, "C1",indent);
-
+		indent--;
 		return node;
 	}
 }
 struct TreeNode * Parser::call()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> Call is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	struct TreeNode * node = new struct TreeNode;
@@ -1034,10 +1045,12 @@ struct TreeNode * Parser::call()
 		exit(-1);
 	}
 	Print(node, "Sibling",indent);
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::args()
 {
+	indent++;
 	if (DEBUG)
 		std::cout << "-> Argument is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	if (currentToken.str[0] == ')')
@@ -1060,6 +1073,7 @@ struct TreeNode * Parser::args()
 	if (DEBUG)
 		std::cout << "-> Argument is returning at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	Print(node, "Sibling",indent);
+	indent--;
 	return node;
 }
 struct TreeNode * Parser::arg_list()
