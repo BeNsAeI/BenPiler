@@ -967,6 +967,8 @@ struct TreeNode * Parser::args()
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
+	if (DEBUG)
+		std::cout << "-> Argument is returning at Token: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
 	return node;
 }
 struct TreeNode * Parser::arg_list()
