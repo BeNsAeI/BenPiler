@@ -1,8 +1,6 @@
 all:
-	git pull
 	make compile
 	make run
-#	make debug
 compile:
 	g++ -std=c++0x main.cpp scanner.cpp parser.cpp -o out.out
 FME:
