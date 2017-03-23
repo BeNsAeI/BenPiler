@@ -960,7 +960,7 @@ struct TreeNode * Parser::args()
 	node->nodeType = ARG;
 	node->typeSpecifier = ARG;
 	node->rename = "NULL";
-	node->c1 = NULL;
+	node->c1 = expression();
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
