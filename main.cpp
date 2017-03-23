@@ -41,6 +41,7 @@ int main (int argc, char ** argv)
 		}
 	}
 	Parser * myParser = new Parser(myScanner->Tokens,DEBUG);
+	struct TreeNode * AST = myParser->Parse();
 	cout << "cleaning out..." << endl;
 	delete (myParser);
 	delete (myScanner);
