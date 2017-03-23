@@ -951,7 +951,8 @@ struct TreeNode * Parser::args()
 {
 	if (DEBUG)
 		std::cout << "-> Argument is raised at: " << currentToken.line << ": " << currentToken.str << "." << std::endl;
-
+	if (currentToken.str[0] == ')')
+		return NULL;
 	struct TreeNode * node = new struct TreeNode;
 	Trash.push_back(node);
 	node->lineNumber = currentToken.line;
@@ -964,6 +965,7 @@ struct TreeNode * Parser::args()
 	tokenIndex--;
 	currentToken = nextToken();
 	node->c1 = expression();
+	currentToken = nextToken();
 	node->c2 = NULL;
 	node->c3 = NULL;
 	node->sibling = NULL;
